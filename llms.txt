@@ -1,0 +1,30 @@
+# BuffNook Tower — Site Index
+
+BuffNook Tower is a free browser-based physics stacking game platform. No accounts, no ads, no tracking.
+
+## Structure
+
+- `/` — Home page with primary game (BuffNook Tower) and full article content
+- `/games/` — All games directory
+- `/games/latest/` — Newest games first
+- `/games/popular/` — Most-played games first
+- `/games/<slug>/` — Individual game pages (full article with How to Play, Tips, FAQ)
+- `/blog/` — Dev logs and design notes
+- `/about.html` — About the team and principles
+- `/privacy.html` — Privacy policy (no data collection)
+- `/terms.html` — Terms of service
+- `/contact.html` — Email addresses for bugs, feedback, press
+
+## Games
+
+- **BuffNook Tower** — Stack 12 physics blocks on a seesaw, survive 5 buffs, decide when to bank. Daily UTC challenge + endless sandbox. Plays on desktop and mobile. URL: `/games/buffnook-tower/`
+
+## Source of Truth
+
+- `data/games.json` — authoritative game metadata
+- `data/posts.json` — blog post metadata
+- `_templates/game.html` — game page template
+- `_templates/page.html` — generic page template
+- `scripts/build.mjs` — generates all game pages, lists, and sitemap from data files
+
+To add a new game: add one entry to `data/games.json`, drop the game bundle into `embed/<slug>/index.html`, then run `node scripts/build.mjs`.

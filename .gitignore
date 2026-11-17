@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+*.log
+
+# Tools & tests
+.tools/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts
+*.log
+
+# Python server
+*.pid
+
+# Env
+.env
+.env.local
+.trae-html-share-packages/

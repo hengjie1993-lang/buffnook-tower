@@ -1,0 +1,77 @@
+{
+  "updated": "2026-11-17",
+  "games": [
+    {
+      "slug": "buffnook-tower",
+      "name": "BuffNook Tower",
+      "h1": "BuffNook Tower",
+      "title": "BuffNook Tower · Free Physics Stacking Game",
+      "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.",
+      "iframe": "embed/buffnook-tower/index.html",
+      "cover": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'><rect width='16' height='9' fill='%2326201B'/><text x='8' y='5.5' font-size='3.5' font-family='ui-monospace,monospace' font-weight='800' fill='%23E8963A' text-anchor='middle'>BuffNook Tower</text></svg>",
+      "tags": ["physics", "stacking", "daily-challenge", "browser"],
+      "related": [],
+      "intro": "Twelve blocks land on a tilted seesaw. Some blocks glue, some sink, some float, some slide. Bank your height at any point — but if you wait too long, the tower collapses and you lose everything. Play free, no account, no ads, saves in your browser.",
+      "howto": [
+        {
+          "mode": "Keyboard",
+          "keys": "Q · E · Space · L",
+          "text": "<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score."
+        },
+        {
+          "mode": "Mouse",
+          "keys": "Click · Drag",
+          "text": "Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand."
+        },
+        {
+          "mode": "Touch",
+          "keys": "One hand, 56vh",
+          "text": "Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching."
+        }
+      ],
+      "goal": "Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. Collapse gives you 40% of your final height; a successful bank gives you 50%. Progress is saved locally in <code>localStorage</code> — nothing leaves your browser.",
+      "tips": [
+        {
+          "num": "01",
+          "title": "Wait a beat before aiming",
+          "text": "The seesaw sways for half a second after each block lands. Aim when the tower settles, not when it's still wobbling."
+        },
+        {
+          "num": "02",
+          "title": "Treat each buff as a question",
+          "text": "Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all."
+        },
+        {
+          "num": "03",
+          "title": "Bank at your personal ceiling",
+          "text": "Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — the guaranteed 50% still beats collapsing to 40% of less."
+        }
+      ],
+      "faq": [
+        {
+          "q": "When does the daily challenge reset?",
+          "a": "BuffNook Tower resets every day at <strong>00:00 UTC</strong>. New seed, new sequence, everyone in the world sees the same 12 blocks that day."
+        },
+        {
+          "q": "Why is my score lower than the tower height?",
+          "a": "Height is measured on the seesaw in centimeters — <strong>collapse awards 40% of your final height</strong>, <strong>a successful bank awards 50%</strong>. Banking at 300 cm gives you a 150 cm score; collapsing at 300 cm gives you 120 cm."
+        },
+        {
+          "q": "What is the difference between official and practice?",
+          "a": "Your <strong>first completed run each day</strong> is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for your own benchmarking."
+        },
+        {
+          "q": "Is BuffNook Tower free to play?",
+          "a": "Yes. BuffNook Tower is completely free, no account required, no tracking, no ads. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it."
+        },
+        {
+          "q": "Can I play on my phone?",
+          "a": "Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android."
+        }
+      ],
+      "dateAdded": "2026-11-10",
+      "popular": 100,
+      "featured": true
+    }
+  ]
+}

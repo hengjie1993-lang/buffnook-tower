@@ -5,15 +5,12 @@ BuffNook Tower is a free browser-based physics stacking game. No account, no dow
 ## Structure
 
 - `/` — Home page with the primary game (BuffNook Tower) and full article content
-- `/games/` — All games directory
-- `/games/latest/` — Newest games first
-- `/games/popular/` — Most-played games first
-- `/games/<slug>/` — Individual game pages (full article with How to Play, Tips, FAQ)
-- `/about.html` — About the team and principles
-- `/privacy.html` — Privacy policy (browser storage, analytics and advertising cookies)
-- `/terms.html` — Terms of service
-- `/disclaimer.html` — Disclaimer (independent site, no third-party affiliation)
-- `/contact.html` — Email addresses for bugs, feedback, press
+- `/games/buffnook-tower/` — BuffNook Tower game page (How to Play, Goal & Scoring, Tips, FAQ)
+- `/about` — About the team and principles
+- `/privacy` — Privacy policy (browser storage, analytics and advertising cookies)
+- `/terms` — Terms of service
+- `/disclaimer` — Disclaimer (independent site, no third-party affiliation)
+- `/contact` — Email addresses for bugs, feedback, press
 
 ## Games
 
@@ -30,6 +27,6 @@ BuffNook Tower is a free browser-based physics stacking game. No account, no dow
 - `data/games.json` — authoritative game metadata
 - `_templates/game.html` — game page template
 - `_templates/page.html` — generic page template
-- `scripts/build.mjs` — generates all game pages, lists, and sitemap from data files
+- `scripts/build.mjs` — generates the game page and sitemap from data files
 
 To add a new game: add one entry to `data/games.json`, drop the game bundle into `embed/<slug>/index.html`, then run `node scripts/build.mjs`.

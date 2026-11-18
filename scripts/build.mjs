@@ -1,8 +1,8 @@
 /* ============================================================
    BuffNook Tower · Site Build Script
    Reads data/games.json + _templates/*.html
-   Generates games/<slug>/index.html, games/index.html,
-   games/latest/index.html, games/popular/index.html, sitemap.xml
+   Generates games/<slug>/index.html and sitemap.xml
+   （列表页入口暂不生成，组件保留备用）
    ============================================================ */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -52,7 +52,6 @@ const gamePages = []; // 用于 sitemap
 
 for (const g of games) {
   const targetRel = `games/${g.slug}/index.html`;
-  const prefix = depthPrefix(targetRel);
 
   // HowTo blocks
   const howtoModes = ['kbd', 'mouse', 'touch'];
@@ -102,7 +101,7 @@ for (const g of games) {
     SLUG: g.slug,
     H1: g.h1 || g.name,
     SUBTITLE: g.subtitle || g.description || '',
-    IFRAME: prefix + g.iframe,
+    IFRAME: '/' + g.iframe,
     COVER_MARK: coverMark,
     WHAT_SENTENCE: whatSentence,
     INTRO: g.intro || '',
@@ -114,18 +113,16 @@ for (const g of games) {
     FAQ_BLOCKS: faqBlocks,
     FAQ_JSONLD: faqJsonLd,
 
-    HOME_LINK: prefix,
-    GAMES_LINK: prefix + 'games/index.html',
-    ABOUT_LINK: prefix + 'about.html',
-    CONTACT_LINK: prefix + 'contact.html',
-    PRIVACY_LINK: prefix + 'privacy.html',
-    TERMS_LINK: prefix + 'terms.html',
-    DISCLAIMER_LINK: prefix + 'disclaimer.html',
-    CSS_PATH: prefix + 'assets/css/style.css',
-    JS_PATH: prefix + 'assets/js/app.js',
+    HOME_LINK: '/',
+    ABOUT_LINK: '/about',
+    CONTACT_LINK: '/contact',
+    PRIVACY_LINK: '/privacy',
+    TERMS_LINK: '/terms',
+    DISCLAIMER_LINK: '/disclaimer',
+    CSS_PATH: '/assets/css/style.css',
+    JS_PATH: '/assets/js/app.js',
 
     HOME_CANONICAL: SITE_URL + '/',
-    GAMES_CANONICAL: `${SITE_URL}/games/`,
   };
 
   const html = renderTemplate(gameTpl, vars);
@@ -193,15 +190,14 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey, 
     TITLE_I18N: `${i18nKey}.page.title`,
     OG_TYPE: 'website',
     OG_IMAGE: `${SITE_URL}/assets/img/logo.png`,
-    HOME_LINK: prefix,
-    GAMES_LINK: prefix + 'games/index.html',
-    ABOUT_LINK: prefix + 'about.html',
-    CONTACT_LINK: prefix + 'contact.html',
-    PRIVACY_LINK: prefix + 'privacy.html',
-    TERMS_LINK: prefix + 'terms.html',
-    DISCLAIMER_LINK: prefix + 'disclaimer.html',
-    CSS_PATH: prefix + 'assets/css/style.css',
-    JS_PATH: prefix + 'assets/js/app.js',
+    HOME_LINK: '/',
+    ABOUT_LINK: '/about',
+    CONTACT_LINK: '/contact',
+    PRIVACY_LINK: '/privacy',
+    TERMS_LINK: '/terms',
+    DISCLAIMER_LINK: '/disclaimer',
+    CSS_PATH: '/assets/css/style.css',
+    JS_PATH: '/assets/js/app.js',
     JSONLD: `<script type="application/ld+json">${breadcrumbJsonLd}</script>`,
     BODY: body,
   };
@@ -212,45 +208,12 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey, 
   console.log(`[build] ✓ ${targetRel}`);
 }
 
-// games/index.html — 全量
-buildListPage({
-  targetRel: 'games/index.html',
-  i18nKey: 'list.games',
-  title: 'All Games · BuffNook Tower',
-  description: 'Browse all physics stacking games on BuffNook Tower.',
-  h2: 'All games',
-  intro: 'Every game currently live on BuffNook Tower. New ones drop as we build them.',
-  sortKey: null, // 保持 JSON 顺序
-});
-
-// games/latest/index.html — 按 dateAdded 倒序
-buildListPage({
-  targetRel: 'games/latest/index.html',
-  i18nKey: 'list.latest',
-  title: 'Latest Games · BuffNook Tower',
-  description: 'The most recently added games on BuffNook Tower.',
-  h2: 'Latest arrivals',
-  intro: 'Fresh releases on BuffNook Tower, sorted by release date.',
-  sortKey: 'dateAdded',
-});
-
-// games/popular/index.html — 按 popular 倒序
-buildListPage({
-  targetRel: 'games/popular/index.html',
-  i18nKey: 'list.popular',
-  title: 'Popular Games · BuffNook Tower',
-  description: 'The most-played games on BuffNook Tower.',
-  h2: 'Most popular',
-  intro: 'The games that get the most plays from the community.',
-  sortKey: 'popular',
-});
+// 列表页组件保留备用：当前站点仅一个游戏，首页即游戏主体，
+// 为避免产生空壳/重复排序页，暂不生成 games/index、games/latest、games/popular。
 
 // ---------- 生成 sitemap.xml ----------
 const urls = [
   { url: SITE_URL + '/', changefreq: 'daily', priority: '1.0' },
-  { url: `${SITE_URL}/games/`, changefreq: 'weekly', priority: '0.9' },
-  { url: `${SITE_URL}/games/latest/`, changefreq: 'weekly', priority: '0.7' },
-  { url: `${SITE_URL}/games/popular/`, changefreq: 'weekly', priority: '0.7' },
   { url: `${SITE_URL}/about`, changefreq: 'monthly', priority: '0.3' },
   { url: `${SITE_URL}/privacy`, changefreq: 'yearly', priority: '0.1' },
   { url: `${SITE_URL}/terms`, changefreq: 'yearly', priority: '0.1' },

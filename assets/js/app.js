@@ -119,7 +119,6 @@
   var I18N = {
     en: {
       // Nav
-      'nav.games': 'Games',
       'nav.about': 'About',
       // Hero
       'hero.subtitle': 'Build high — then know when to stop. A free browser physics stacking game.',
@@ -279,7 +278,6 @@
       'notfound.page.title': 'Page not found · BuffNook Tower',
     },
     'zh-CN': {
-      'nav.games': '游戏大厅',
       'nav.about': '关于',
       'hero.subtitle': '堆得高——也要知道什么时候该停。一个免费的浏览器物理堆塔游戏。',
       'btn.share': '分享',

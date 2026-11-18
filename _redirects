@@ -1,2 +1,11 @@
-/blog    /games/    301
-/blog/*  /games/    301
+# 旧地址与已下线栏目的 301 重定向
+/blog             /                        301
+/game             /                        301
+/game.html        /                        301
+/games            /games/buffnook-tower/   301
+/games/           /games/buffnook-tower/   301
+/games/index.html /games/buffnook-tower/   301
+/games/latest     /games/buffnook-tower/   301
+/games/latest/    /games/buffnook-tower/   301
+/games/popular    /games/buffnook-tower/   301
+/games/popular/   /games/buffnook-tower/   301

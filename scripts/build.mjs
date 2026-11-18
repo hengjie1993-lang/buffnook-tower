@@ -116,11 +116,11 @@ for (const g of games) {
 
     HOME_LINK: prefix,
     GAMES_LINK: prefix + 'games/index.html',
-    BLOG_LINK: prefix + 'blog/index.html',
     ABOUT_LINK: prefix + 'about.html',
     CONTACT_LINK: prefix + 'contact.html',
     PRIVACY_LINK: prefix + 'privacy.html',
     TERMS_LINK: prefix + 'terms.html',
+    DISCLAIMER_LINK: prefix + 'disclaimer.html',
     CSS_PATH: prefix + 'assets/css/style.css',
     JS_PATH: prefix + 'assets/js/app.js',
 
@@ -195,11 +195,11 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey, 
     OG_IMAGE: `${SITE_URL}/assets/img/logo.png`,
     HOME_LINK: prefix,
     GAMES_LINK: prefix + 'games/index.html',
-    BLOG_LINK: prefix + 'blog/index.html',
     ABOUT_LINK: prefix + 'about.html',
     CONTACT_LINK: prefix + 'contact.html',
     PRIVACY_LINK: prefix + 'privacy.html',
     TERMS_LINK: prefix + 'terms.html',
+    DISCLAIMER_LINK: prefix + 'disclaimer.html',
     CSS_PATH: prefix + 'assets/css/style.css',
     JS_PATH: prefix + 'assets/js/app.js',
     JSONLD: `<script type="application/ld+json">${breadcrumbJsonLd}</script>`,
@@ -245,30 +245,16 @@ buildListPage({
   sortKey: 'popular',
 });
 
-// blog/index.html（空壳，posts.json 为空）
-buildListPage({
-  targetRel: 'blog/index.html',
-  i18nKey: 'list.blog',
-  title: 'Blog · BuffNook Tower',
-  description: 'Dev logs, design notes, and stacking tips from the BuffNook Tower team.',
-  h2: 'Blog',
-  intro: 'Dev logs, design notes, and stacking tips. More posts coming soon.',
-  sortKey: null,
-  items: [],
-  emptyKey: 'blog.empty',
-  emptyText: 'No posts yet — check back soon.',
-});
-
 // ---------- 生成 sitemap.xml ----------
 const urls = [
   { url: SITE_URL + '/', changefreq: 'daily', priority: '1.0' },
   { url: `${SITE_URL}/games/`, changefreq: 'weekly', priority: '0.9' },
   { url: `${SITE_URL}/games/latest/`, changefreq: 'weekly', priority: '0.7' },
   { url: `${SITE_URL}/games/popular/`, changefreq: 'weekly', priority: '0.7' },
-  { url: `${SITE_URL}/blog/`, changefreq: 'weekly', priority: '0.6' },
   { url: `${SITE_URL}/about`, changefreq: 'monthly', priority: '0.3' },
   { url: `${SITE_URL}/privacy`, changefreq: 'yearly', priority: '0.1' },
   { url: `${SITE_URL}/terms`, changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/disclaimer`, changefreq: 'yearly', priority: '0.1' },
   { url: `${SITE_URL}/contact`, changefreq: 'monthly', priority: '0.2' },
   ...gamePages.map(p => ({ url: p.url, changefreq: 'weekly', priority: '0.8' })),
 ];

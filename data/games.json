@@ -11,12 +11,12 @@
       "cover": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'><rect width='16' height='9' fill='%2326201B'/><text x='8' y='5.5' font-size='3.5' font-family='ui-monospace,monospace' font-weight='800' fill='%23E8963A' text-anchor='middle'>BuffNook Tower</text></svg>",
       "tags": ["physics", "stacking", "daily-challenge", "browser"],
       "related": [],
-      "intro": "Twelve blocks land on a tilted seesaw. Some blocks glue, some sink, some float, some slide. Bank your height at any point — but if you wait too long, the tower collapses and you lose everything. Play free, no account, no ads, saves in your browser.",
+      "intro": "Twelve blocks land on a tilted seesaw. Some blocks glue, some sink, some float, some slide. Bank your height at any point to keep 100% of it — but if you wait too long, the tower collapses and your score drops to 40% of the height you reached. Free to play in your browser, no account needed.",
       "howto": [
         {
           "mode": "Keyboard",
           "keys": "Q · E · Space · L",
-          "text": "<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score."
+          "text": "<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> banks the tower after 3 blocks — hold still for 1.5 seconds and keep 100% of your height."
         },
         {
           "mode": "Mouse",
@@ -29,7 +29,7 @@
           "text": "Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching."
         }
       ],
-      "goal": "Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. Collapse gives you 40% of your final height; a successful bank gives you 50%. Progress is saved locally in <code>localStorage</code> — nothing leaves your browser.",
+      "goal": "Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. A successful bank scores <strong>100%</strong> of your height; a collapse during the 1.5-second lock confirmation keeps <strong>50%</strong>; collapsing before you bank keeps <strong>40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm. Progress is saved locally in <code>localStorage</code>.",
       "tips": [
         {
           "num": "01",
@@ -44,7 +44,7 @@
         {
           "num": "03",
           "title": "Bank at your personal ceiling",
-          "text": "Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — the guaranteed 50% still beats collapsing to 40% of less."
+          "text": "Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — a bank keeps 100% of your height, while waiting too long drops you to 40%."
         }
       ],
       "faq": [
@@ -54,7 +54,7 @@
         },
         {
           "q": "Why is my score lower than the tower height?",
-          "a": "Height is measured on the seesaw in centimeters — <strong>collapse awards 40% of your final height</strong>, <strong>a successful bank awards 50%</strong>. Banking at 300 cm gives you a 150 cm score; collapsing at 300 cm gives you 120 cm."
+          "a": "Height is measured on the seesaw in centimeters — <strong>a successful bank scores 100% of your height</strong>, <strong>a collapse during lock confirmation keeps 50%</strong>, and <strong>collapsing before you bank keeps 40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm."
         },
         {
           "q": "What is the difference between official and practice?",
@@ -62,7 +62,7 @@
         },
         {
           "q": "Is BuffNook Tower free to play?",
-          "a": "Yes. BuffNook Tower is completely free, no account required, no tracking, no ads. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it."
+          "a": "Yes. BuffNook Tower is 100% free to play in your browser — no account, no downloads, and no paywalls required. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it."
         },
         {
           "q": "Can I play on my phone?",

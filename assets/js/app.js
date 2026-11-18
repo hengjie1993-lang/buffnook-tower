@@ -32,39 +32,7 @@
     window.track('game_init', { slug: container.dataset.slug || 'buffnook-tower' });
   }
 
-  // ---------- 2. 点赞 ----------
-  function initLike(btn) {
-    if (!btn) return;
-    var slug = btn.dataset.slug || 'buffnook-tower';
-    var storageKey = 'buffnook.likes.' + slug;
-    var count = 0;
-    try { count = parseInt(localStorage.getItem(storageKey) || '0', 10); } catch (e) {}
-
-    function render() {
-      btn.querySelector('.like-count').textContent = count;
-      btn.classList.toggle('liked', count > 0);
-      btn.disabled = count > 0;
-    }
-    render();
-
-    btn.addEventListener('click', function () {
-      if (btn.disabled) return;
-      count++;
-      try { localStorage.setItem(storageKey, String(count)); } catch (e) {}
-      render();
-      window.track('like', { slug: slug });
-      // 本地小弹（不依赖 toast 库）
-      var tip = document.createElement('span');
-      tip.textContent = '+1';
-      tip.style.cssText = 'position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--amber);font-weight:800;font-family:var(--mono);pointer-events:none;opacity:1;transition:opacity .3s,top .3s;';
-      btn.style.position = 'relative';
-      btn.appendChild(tip);
-      requestAnimationFrame(function () { tip.style.opacity = '0'; tip.style.top = '-28px'; });
-      setTimeout(function () { tip.remove(); }, 350);
-    });
-  }
-
-  // ---------- 3. 分享 ----------
+  // ---------- 2. 分享 ----------
   function initShare(btn) {
     if (!btn) return;
     btn.addEventListener('click', async function () {
@@ -146,53 +114,28 @@
     }, 1600);
   }
 
-  // ---------- 7. 延迟加载评论区 ----------
-  function loadCommentsWhenVisible() {
-    var box = document.querySelector('.comments');
-    if (!box || box.dataset.loaded) return;
-    if (typeof IntersectionObserver === 'undefined') return;
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          box.dataset.loaded = 'loading';
-          io.disconnect();
-          var s = document.createElement('script');
-          var appScript = document.querySelector('script[src$="assets/js/app.js"]');
-          s.src = appScript ? new URL('comments.js', appScript.src).href : 'assets/js/comments.js';
-          s.defer = true;
-          s.onload = function () { box.dataset.loaded = 'loaded'; applyI18n(getLang()); };
-          document.head.appendChild(s);
-          window.track('comments_lazy_loaded');
-        }
-      });
-    }, { rootMargin: '300px' });
-    io.observe(box);
-  }
-
-  // ---------- 8. 网站双语字典 ----------
+  // ---------- 7. 网站双语字典 ----------
   // 游戏本体的翻译在它自己的 game.js 里，这里只管站点外壳
   var I18N = {
     en: {
       // Nav
       'nav.games': 'Games',
-      'nav.blog': 'Blog',
       'nav.about': 'About',
       // Hero
       'hero.subtitle': 'Build high — then know when to stop. A free browser physics stacking game.',
       // Buttons
-      'btn.like': 'Like',
       'btn.share': 'Share',
       'btn.fullscreen': 'Fullscreen',
       // What is it
       'what.eyebrow': 'What is it',
       'what.title': 'BuffNook Tower is a physics game about knowing when to stop.',
-      'what.body': 'Twelve blocks land on a tilted seesaw. Some blocks glue, some sink, some float, some slide. Bank your height at any point — but if you wait too long, the tower collapses and you lose everything. Play free, no account, no ads, saves in your browser.',
+      'what.body': 'Twelve blocks land on a tilted seesaw. Some blocks glue, some sink, some float, some slide. Bank your height at any point to keep 100% of it — but if you wait too long, the tower collapses and your score drops to 40% of the height you reached. Free to play in your browser, no account needed.',
       // How to play
       'how.eyebrow': 'How to play',
       'how.title': 'Land blocks, keep balance, decide when to bank.',
       'how.kbd.mode': 'Keyboard',
       'how.kbd.title': 'Q · E · Space · L',
-      'how.kbd.body': '<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score.',
+      'how.kbd.body': '<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> banks the tower after 3 blocks — hold still for 1.5 seconds and keep 100% of your height.',
       'how.mouse.mode': 'Mouse',
       'how.mouse.title': 'Click · Drag',
       'how.mouse.body': 'Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.',
@@ -200,7 +143,7 @@
       'how.touch.title': 'One hand, 56vh',
       'how.touch.body': 'Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching.',
       'how.goal.title': 'Goal & scoring',
-      'how.goal.body': 'Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. Collapse gives you 40% of your final height; a successful bank gives you 50%. Progress is saved locally in <code>localStorage</code> — nothing leaves your browser.',
+      'how.goal.body': 'Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. A successful bank scores <strong>100%</strong> of your height; a collapse during the 1.5-second lock confirmation keeps <strong>50%</strong>; collapsing before you bank keeps <strong>40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm. Progress is saved locally in <code>localStorage</code>.',
       // Tips
       'tips.eyebrow': 'Tips that actually work',
       'tips.title': 'Three habits that win rounds consistently.',
@@ -209,40 +152,38 @@
       'tips.2.title': 'Treat each buff as a question',
       'tips.2.body': 'Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all.',
       'tips.3.title': 'Bank at your personal ceiling',
-      'tips.3.body': 'Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — the guaranteed 50% still beats collapsing to 40% of less.',
+      'tips.3.body': 'Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — a bank keeps 100% of your height, while waiting too long drops you to 40%.',
       // FAQ
       'faq.eyebrow': 'FAQ',
       'faq.title': 'Short answers, no fluff.',
       'faq.q1': 'When does the daily challenge reset?',
       'faq.a1': 'BuffNook Tower resets every day at <strong>00:00 UTC</strong>. New seed, new sequence, everyone in the world sees the same 12 blocks that day.',
       'faq.q2': 'Why is my score lower than the tower height?',
-      'faq.a2': 'Height is measured on the seesaw in centimeters — <strong>collapse awards 40% of your final height</strong>, <strong>a successful bank awards 50%</strong>. Banking at 300 cm gives you a 150 cm score; collapsing at 300 cm gives you 120 cm.',
+      'faq.a2': 'Height is measured on the seesaw in centimeters — <strong>a successful bank scores 100% of your height</strong>, <strong>a collapse during lock confirmation keeps 50%</strong>, and <strong>collapsing before you bank keeps 40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm.',
       'faq.q3': 'What is the difference between official and practice?',
       'faq.a3': 'Your <strong>first completed run each day</strong> is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for your own benchmarking.',
       'faq.q4': 'Is BuffNook Tower free to play?',
-      'faq.a4': 'Yes. BuffNook Tower is completely free, no account required, no tracking, no ads. Progress saves only to your browser\'s <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it.',
+      'faq.a4': 'Yes. BuffNook Tower is 100% free to play in your browser — no account, no downloads, and no paywalls required. Progress saves only to your browser\'s <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it.',
       'faq.q5': 'Can I play on my phone?',
       'faq.a5': 'Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android.',
-      // Comments
-      'comments.title': 'Share your best run',
-      'comments.body': 'What height did you hit before collapsing? Any tower-saving tricks the tips section missed?',
-      'comments.empty': 'No one has commented yet. Be the first — your best height story goes here.',
+
       // Footer
       'footer.about': 'About',
       'footer.contact': 'Contact',
       'footer.privacy': 'Privacy',
       'footer.terms': 'Terms',
+      'footer.disclaimer': 'Disclaimer',
       // About page
       'about.h1': 'About BuffNook Tower',
       'about.eyebrow1': 'About',
       'about.title1': 'An independent game about knowing when to stop.',
-      'about.body1': 'BuffNook Tower is a free browser game made by a small independent team. We wanted to build something that felt like the physics stacking games we loved as kids — but without the ads, accounts, and friction that clutter the modern web.',
+      'about.body1': 'BuffNook Tower is a free browser game made by a small independent team. We wanted to build something that felt like the physics stacking games we loved as kids — without accounts, downloads, or the friction that clutters the modern web.',
       'about.eyebrow2': 'What we care about',
       'about.title2': 'Three principles that shape everything we build.',
       'about.card1.title': 'No accounts, ever',
       'about.card1.body': 'Progress saves in your browser\'s <code>localStorage</code>. We never ask for an email, a password, or any personal information.',
-      'about.card2.title': 'No ads, no pop-ups',
-      'about.card2.body': 'You play the game, not our marketing. We will never show banner ads, mid-roll ads, or reward-video ads in any game on BuffNook Tower.',
+      'about.card2.title': 'No accounts, no downloads',
+      'about.card2.body': 'Open the page and play. There is nothing to install, no sign-up and no paywall — your progress and scores stay in your own browser.',
       'about.card3.title': 'Desktop and mobile, first class',
       'about.card3.body': 'Every game we ship must work well on a laptop, a phone held one-handed, and a tablet in landscape. No "mobile coming soon".',
       'about.eyebrow3': 'Tech',
@@ -263,15 +204,15 @@
       'privacy.h1': 'Privacy Policy',
       'privacy.eyebrow': 'Privacy',
       'privacy.title': 'We collect almost nothing. Here\'s what that means.',
-      'privacy.updated': 'Last updated: November 17, 2026',
+      'privacy.updated': 'Last updated: November 18, 2026',
       'privacy.s1.title': 'What happens on your device stays on your device',
       'privacy.s1.body': 'Game progress, scores, settings, and any other game state are stored in your browser\'s <code>localStorage</code> under keys prefixed with <code>buffnook.</code>. This data never leaves your device unless you explicitly clear it. We do not have, and will never have, a server that stores your game data.',
       'privacy.s2.title': 'What we do not collect',
-      'privacy.s2.body': '<strong>No email addresses.</strong> No accounts, no newsletters, no password resets.<br><strong>No names or usernames.</strong> We don\'t know who you are.<br><strong>No precise location.</strong> No IP logging, no geolocation APIs.<br><strong>No third-party trackers.</strong> No Google Analytics, no Facebook Pixel, no ad networks.',
+      'privacy.s2.body': '<strong>No email addresses.</strong> No accounts, no newsletters, no password resets.<br><strong>No names or usernames.</strong> We don\'t know who you are.<br><strong>No precise location.</strong> We never request location access.<br><strong>No sale of personal data.</strong> We never sell or rent visitor information.',
       'privacy.s3.title': 'What Cloudflare sees',
       'privacy.s3.body': 'BuffNook Tower is hosted on Cloudflare Pages. Cloudflare may process your IP address and user agent in the course of delivering pages and protecting against abuse. Their privacy policy applies to that processing. We do not sell, trade, or otherwise use that information.',
-      'privacy.s4.title': 'Comments',
-      'privacy.s4.body': 'If we add a comment feature in the future, it will be clearly labeled and will never require an account. We will never use comments to solicit personal information.',
+      'privacy.s4.title': 'Cookies, analytics and advertising',
+      'privacy.s4.body': 'Game progress, scores and your language choice are stored in your browser\'s <code>localStorage</code> — they are not cookies and are never sent to us. We may use privacy-respecting analytics to understand traffic, and we may show third-party advertising (for example Google AdSense) to keep the game free. Advertising and analytics partners may set cookies or use device identifiers to serve and measure ads; where the law requires it, we ask for consent before any non-essential cookie is set. You can block or delete cookies in your browser settings, and you can opt out of personalised advertising through Google\'s Ad Settings.',
       'privacy.s5.title': 'Changes to this policy',
       'privacy.s5.body': 'If this policy changes, we will update the "last updated" date at the top of this page. Material changes will be noted in the changelog below.',
       // Terms page
@@ -302,12 +243,7 @@
       'list.popular.eyebrow': 'Most',
       'list.popular.intro': 'The games that get the most plays from the community.',
       'list.popular.page.title': 'Popular Games · BuffNook Tower',
-      'list.blog.h1': 'Blog',
-      'list.blog.eyebrow': 'Blog',
-      'list.blog.intro': 'Dev logs, design notes, and stacking tips. More posts coming soon.',
-      'list.blog.page.title': 'Blog · BuffNook Tower',
       'list.empty': 'No games yet. Check back soon.',
-      'blog.empty': 'No posts yet — check back soon.',
       'game.buffnook-tower.desc': 'Stack 12 physics blocks, survive 5 buffs, and decide when to bank.',
       'game.loading': 'Loading…',
       // Page titles
@@ -316,15 +252,26 @@
       'contact.page.title': 'Contact · BuffNook Tower',
       'privacy.page.title': 'Privacy Policy · BuffNook Tower',
       'terms.page.title': 'Terms of Service · BuffNook Tower',
-      'comments.post': 'Post',
-      'comments.reply': 'Reply',
-      'comments.placeholder': 'Share your best height or a tower-saving trick.',
       // Site titles
       'site.title': 'BuffNook Tower · Free Physics Stacking Game',
       'site.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.',
       'site.breadcrumb.home': 'Home',
+      // Disclaimer page
+      'disclaimer.h1': 'Disclaimer',
+      'disclaimer.eyebrow': 'Disclaimer',
+      'disclaimer.title': 'An independent game site, not affiliated with anyone else.',
+      'disclaimer.updated': 'Last updated: November 18, 2026',
+      'disclaimer.s1.title': 'Independent project',
+      'disclaimer.s1.body': 'BuffNook Tower is an independent game and tools website built by a small team. We are not affiliated with, endorsed by, sponsored by, or otherwise connected to any third-party game publisher, developer, console maker, or platform. Any product names, logos, or trademarks mentioned on this site belong to their respective owners and are used only for identification.',
+      'disclaimer.s2.title': 'No warranties',
+      'disclaimer.s2.body': 'All games and tools on this site are provided \u201cas is\u201d, without warranties of any kind. Scores, rankings and statistics are for entertainment only and carry no official or competitive value. We do not guarantee uninterrupted availability or that saved progress will never be lost \u2014 clearing your browser data will reset it.',
+      'disclaimer.s3.title': 'External links and advertising',
+      'disclaimer.s3.body': 'This site may link to third-party websites and may display third-party advertising. We do not control and are not responsible for the content, products, or privacy practices of those third parties. Visiting an external site is at your own discretion.',
+      'disclaimer.s4.title': 'Contact',
+      'disclaimer.s4.body': 'If you believe any content on this site infringes your rights, please reach out through our contact page and we will review it promptly.',
+      'disclaimer.page.title': 'Disclaimer · BuffNook Tower',
       // 404
       'notfound.title': 'Page not found',
       'notfound.body': 'The page you are looking for does not exist or has moved. The game is still here.',
@@ -333,20 +280,18 @@
     },
     'zh-CN': {
       'nav.games': '游戏大厅',
-      'nav.blog': '博客',
       'nav.about': '关于',
       'hero.subtitle': '堆得高——也要知道什么时候该停。一个免费的浏览器物理堆塔游戏。',
-      'btn.like': '喜欢',
       'btn.share': '分享',
       'btn.fullscreen': '全屏',
       'what.eyebrow': '这是什么',
       'what.title': 'BuffNook Tower 是一个关于懂得何时收手的物理游戏。',
-      'what.body': '十二块积木落在倾斜的跷跷板上。有的会粘住，有的会下沉，有的会漂浮，有的会滑动。随时可以锁定分数——但等太久塔就会塌，一切归零。免费玩，无需账号，无广告，进度存在浏览器里。',
+      'what.body': '十二块积木落在倾斜的跷跷板上。有的会粘住，有的会下沉，有的会漂浮，有的会滑动。随时可以封顶锁定，锁定后 100% 高度都计入成绩；等太久塔就会塌，只剩坍塌前高度的 40%。免费玩，无需账号，进度存在浏览器里。',
       'how.eyebrow': '怎么玩',
       'how.title': '落块、保持平衡、决定何时锁分。',
       'how.kbd.mode': '键盘',
       'how.kbd.title': 'Q · E · 空格 · L',
-      'how.kbd.body': '<strong>Q / E</strong> 让下落的积木旋转 15°。<strong>空格</strong> 落块。<strong>L</strong> 连续落 3 块后可以锁定——锁定得分为当前高度的一半，保底。',
+      'how.kbd.body': '<strong>Q / E</strong> 让下落的积木旋转 15°。<strong>空格</strong> 落块。<strong>L</strong> 连续落 3 块后可以封顶锁定——保持不动 1.5 秒，锁定后 100% 高度都计入成绩。',
       'how.mouse.mode': '鼠标',
       'how.mouse.title': '点击 · 拖拽',
       'how.mouse.body': '点左右旋转按钮、按键帽落块，或直接在画布上拖拽瞄准。单手就能玩。',
@@ -354,7 +299,7 @@
       'how.touch.title': '单手操作，56vh',
       'how.touch.body': '点旋转、点落块、点锁分。手机视口会把游戏区缩小到 56vh，保证控制按钮上方始终可见。不用滚动，不用缩放。',
       'how.goal.title': '目标与计分',
-      'how.goal.body': '你每天 <strong>第一局完整完成的落块</strong> 会被记录为官方成绩（UTC 每日重置）。之后再玩都是练习分，不会覆盖官方成绩。坍塌给你最终高度的 40%；成功锁分给 50%。进度存在浏览器的 <code>localStorage</code> 里——什么都不会离开你的浏览器。',
+      'how.goal.body': '你每天 <strong>第一局完整完成的落块</strong> 会被记录为官方成绩（UTC 每日重置）。之后再玩都是练习分，不会覆盖官方成绩。成功封顶锁定保留 <strong>100%</strong> 高度；锁定确认期间意外坍塌保留 <strong>50%</strong>；未锁定直接坍塌只保留 <strong>40%</strong>。300 cm 锁定得 300 cm；300 cm 坍塌得 120 cm。进度存在浏览器的 <code>localStorage</code> 里。',
       'tips.eyebrow': '真正有用的技巧',
       'tips.title': '三个能稳定帮你赢的习惯。',
       'tips.1.title': '等积木落稳再瞄准',
@@ -362,37 +307,36 @@
       'tips.2.title': '把每个 Buff 当成一个选择题',
       'tips.2.body': '粘 Buff 会让积木粘住不动——适合固定底部。铅 Buff 会把跷跷板压下去——放在轻的一侧。浮 Buff 刚好抵消铅。冰 Buff 让一切滑动——最后放或干脆不放。',
       'tips.3.title': '在你的个人天花板就锁分',
-      'tips.3.body': '大多数玩家在 280–340 cm 附近坍塌。如果你的塔到了 280 而且没明显问题，直接锁——保底 50% 总比坍塌只剩 40% 好。',
+      'tips.3.body': '大多数玩家在 280–340 cm 附近坍塌。如果你的塔到了 280 而且没明显问题，直接封顶——锁定能保住 100% 高度，再等下去坍塌只剩 40%。',
       'faq.eyebrow': '常见问题',
       'faq.title': '短答，不啰嗦。',
       'faq.q1': '每日挑战什么时候重置？',
       'faq.a1': 'BuffNook Tower 每天在 <strong>UTC 00:00</strong> 重置。新种子、新顺序，全世界的人当天看到的 12 块积木都一样。',
       'faq.q2': '为什么我的分数比塔的高度低？',
-      'faq.a2': '高度以厘米为单位在跷跷板上测量——<strong>坍塌给最终高度的 40%</strong>，<strong>成功锁分给 50%</strong>。300 cm 锁分得 150 cm 分；300 cm 坍塌得 120 cm 分。',
+      'faq.a2': '高度以厘米为单位在跷跷板上测量——<strong>成功封顶锁定保留 100% 高度</strong>，<strong>锁定确认期间意外坍塌保留 50%</strong>，<strong>未锁定直接坍塌只保留 40%</strong>。300 cm 锁定得 300 cm；300 cm 坍塌得 120 cm。',
       'faq.q3': '官方分和练习分有什么区别？',
       'faq.a3': '每天 <strong>第一局完整完成的</strong> 是你的官方成绩——锁定、存档、永不再覆盖。之后每一局都是练习分，单独保存供你自己对比。',
       'faq.q4': 'BuffNook Tower 免费吗？',
-      'faq.a4': '完全免费，无需账号，无追踪，无广告。进度只存在浏览器的 <code>localStorage</code> 里，key 是 <code>buffnook.tower.save</code>。清除站点数据会重置。',
+      'faq.a4': '完全免费，浏览器直接玩——无需账号、无需下载、没有付费墙。进度只存在浏览器的 <code>localStorage</code> 里，key 是 <code>buffnook.tower.save</code>。清除站点数据会重置。',
       'faq.q5': '手机上能玩吗？',
       'faq.a5': '能。手机视口会把游戏画布缩小到 56vh，旋转/落块/锁分按钮放大，所有操作一只手就能完成。iOS Safari 和 Android Chrome 都支持。',
-      'comments.title': '分享你的最佳成绩',
-      'comments.body': '你在坍塌前堆到了多高？有没有技巧是技巧区没提到的？',
-      'comments.empty': '还没人评论—— 聊聊你玩的最高塔吧 ↓',
+
       'footer.about': '关于',
       'footer.contact': '联系',
       'footer.privacy': '隐私',
       'footer.terms': '条款',
+      'footer.disclaimer': '免责声明',
       // About page
       'about.h1': '关于 BuffNook Tower',
       'about.eyebrow1': '关于',
       'about.title1': '一个关于懂得何时收手的独立游戏。',
-      'about.body1': 'BuffNook Tower 是一个免费的浏览器游戏，由一个小独立团队制作。我们想做一款像小时候玩过的物理堆塔游戏那样的作品——但没有广告、账号，也没有现代网页上那些烦人的摩擦。',
+      'about.body1': 'BuffNook Tower 是一个免费的浏览器游戏，由一个小独立团队制作。我们想做一款像小时候玩过的物理堆塔游戏那样的作品——没有账号、没有下载，也没有现代网页上那些烦人的摩擦。',
       'about.eyebrow2': '我们在意什么',
       'about.title2': '三条原则，塑造我们做的每一件事。',
       'about.card1.title': '永远不要账号',
       'about.card1.body': '进度存在浏览器的 <code>localStorage</code> 里。我们永远不会要你的邮箱、密码或任何个人信息。',
-      'about.card2.title': '没有广告，没有弹窗',
-      'about.card2.body': '你玩游戏，不是玩我们的营销。BuffNook Tower 上任何游戏都不会有横幅广告、中间插播广告或奖励视频广告。',
+      'about.card2.title': '无需账号，无需下载',
+      'about.card2.body': '打开页面就能玩。不用安装、不用注册、没有付费墙——进度和成绩都存在你自己的浏览器里。',
       'about.card3.title': '桌面和手机，一等公民',
       'about.card3.body': '我们做的每款游戏都必须在笔记本上、单手拿的手机上、横屏平板上都好玩。不说"手机版马上来"。',
       'about.eyebrow3': '技术',
@@ -413,15 +357,15 @@
       'privacy.h1': '隐私政策',
       'privacy.eyebrow': '隐私',
       'privacy.title': '我们几乎不收集任何信息。意思是这样。',
-      'privacy.updated': '最后更新：2026 年 11 月 17 日',
+      'privacy.updated': '最后更新：2026 年 11 月 18 日',
       'privacy.s1.title': '你设备上的数据就留在你设备上',
       'privacy.s1.body': '游戏进度、分数、设置和其他游戏状态都存在浏览器的 <code>localStorage</code> 里，key 前缀为 <code>buffnook.</code>。除非你主动清除，这些数据永远不会离开你的设备。我们没有、也永远不会有一台服务器来存你的游戏数据。',
       'privacy.s2.title': '我们不收集的',
-      'privacy.s2.body': '<strong>不要邮箱。</strong> 没有账号、没有邮件列表、没有密码重置。<br><strong>不要名字或用户名。</strong> 我们不知道你是谁。<br><strong>不要精确位置。</strong> 不记 IP、不用地理位置 API。<br><strong>不要第三方追踪器。</strong> 没有 Google Analytics、没有 Facebook Pixel、没有广告网络。',
+      'privacy.s2.body': '<strong>不要邮箱。</strong> 没有账号、没有邮件列表、没有密码重置。<br><strong>不要名字或用户名。</strong> 我们不知道你是谁。<br><strong>不要精确位置。</strong> 我们不会请求定位权限。<br><strong>不出售个人数据。</strong> 我们不会出售或出租访客信息。',
       'privacy.s3.title': 'Cloudflare 看到什么',
       'privacy.s3.body': 'BuffNook Tower 托管在 Cloudflare Pages 上。Cloudflare 在提供页面和防护恶意行为时可能处理你的 IP 地址和 user agent。他们的隐私政策适用于这些处理。我们不会出售、交易或以其他方式使用这些信息。',
-      'privacy.s4.title': '评论',
-      'privacy.s4.body': '如果将来加评论功能，会明确标注，而且永远不需要账号。我们永远不会用评论来索取个人信息。',
+      'privacy.s4.title': 'Cookie、统计与广告',
+      'privacy.s4.body': '游戏进度、成绩和语言偏好存在浏览器的 <code>localStorage</code> 里——它们不是 Cookie，也不会发送给我们。我们可能使用注重隐私的流量统计，也可能展示第三方广告（例如 Google AdSense）来维持游戏免费。广告与统计合作方可能会写入 Cookie 或使用设备标识来投放和衡量广告；在法律要求的地区，我们会在写入任何非必要 Cookie 前征求同意。你可以在浏览器设置中阻止或删除 Cookie，也可以通过 Google 广告设置退出个性化广告。',
       'privacy.s5.title': '政策变更',
       'privacy.s5.body': '如果政策有变，会更新本页顶部的"最后更新"日期。重大变更会在下方 changelog 注明。',
       // Terms page
@@ -452,12 +396,7 @@
       'list.popular.eyebrow': '热门',
       'list.popular.intro': '玩家最常游玩的 BuffNook Tower 游戏。',
       'list.popular.page.title': '热门游戏 · BuffNook Tower',
-      'list.blog.h1': '博客',
-      'list.blog.eyebrow': '博客',
-      'list.blog.intro': '开发日志、设计笔记和堆塔技巧，更多文章即将发布。',
-      'list.blog.page.title': '博客 · BuffNook Tower',
       'list.empty': '还没有游戏，敬请期待。',
-      'blog.empty': '还没有文章，敬请期待。',
       'game.buffnook-tower.desc': '堆叠 12 块物理积木，应对 5 种 Buff，并决定何时锁分。',
       'game.loading': '加载中…',
       // Page titles
@@ -466,14 +405,25 @@
       'contact.page.title': '联系 · BuffNook Tower',
       'privacy.page.title': '隐私政策 · BuffNook Tower',
       'terms.page.title': '服务条款 · BuffNook Tower',
-      'comments.post': '发布',
-      'comments.reply': '回复',
-      'comments.placeholder': '分享你的最高成绩或拯救高塔的技巧。',
       'site.title': 'BuffNook 高塔 · 免费物理堆塔游戏',
       'site.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。BuffNook Tower 是一个免费的浏览器游戏——桌面和手机都能玩，无需账号。',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。免费浏览器游戏。',
       'site.breadcrumb.home': '首页',
+      // Disclaimer page
+      'disclaimer.h1': '免责声明',
+      'disclaimer.eyebrow': '免责声明',
+      'disclaimer.title': '独立游戏站点，不隶属于任何第三方。',
+      'disclaimer.updated': '最后更新：2026 年 11 月 18 日',
+      'disclaimer.s1.title': '独立项目',
+      'disclaimer.s1.body': 'BuffNook Tower 是由一个小团队制作的独立游戏与工具网站。我们与任何第三方游戏发行商、开发商、主机厂商或平台都没有隶属、背书、赞助或合作关系。本站提到的任何产品名称、Logo 或商标均归各自所有者所有，仅用于识别目的。',
+      'disclaimer.s2.title': '不作任何担保',
+      'disclaimer.s2.body': '本站所有游戏与工具均按“现状”提供，不附带任何形式的担保。分数、排名与统计数据仅供娱乐，不具备官方或竞技效力。我们不保证服务永不中断，也不保证存档永不丢失——清除浏览器数据会重置进度。',
+      'disclaimer.s3.title': '外部链接与广告',
+      'disclaimer.s3.body': '本站可能链接到第三方网站，也可能展示第三方广告。我们无法控制、也不对第三方的内容、产品或隐私做法负责。是否访问外部网站由你自行判断。',
+      'disclaimer.s4.title': '联系我们',
+      'disclaimer.s4.body': '如果你认为本站内容侵犯了你的权利，请通过联系页面告知我们，我们会尽快核实处理。',
+      'disclaimer.page.title': '免责声明 · BuffNook Tower',
       // 404
       'notfound.title': '页面不存在',
       'notfound.body': '你要找的页面不存在，或者已经被移动了。游戏还在首页等你。',
@@ -563,14 +513,12 @@
     });
   }
 
-  // ---------- 10. 启动 ----------
+  // ---------- 9. 启动 ----------
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.game-stage').forEach(initGame);
-    document.querySelectorAll('[data-action="like"]').forEach(initLike);
     document.querySelectorAll('[data-action="share"]').forEach(initShare);
     document.querySelectorAll('[data-action="fullscreen"]').forEach(initFullscreen);
     initFaq();
-    loadCommentsWhenVisible();
     initLang();
     window.track('page_view', { path: location.pathname });
   });

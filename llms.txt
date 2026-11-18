@@ -1,28 +1,33 @@
 # BuffNook Tower — Site Index
 
-BuffNook Tower is a free browser-based physics stacking game platform. No accounts, no ads, no tracking.
+BuffNook Tower is a free browser-based physics stacking game. No account, no download, no paywall.
 
 ## Structure
 
-- `/` — Home page with primary game (BuffNook Tower) and full article content
+- `/` — Home page with the primary game (BuffNook Tower) and full article content
 - `/games/` — All games directory
 - `/games/latest/` — Newest games first
 - `/games/popular/` — Most-played games first
 - `/games/<slug>/` — Individual game pages (full article with How to Play, Tips, FAQ)
-- `/blog/` — Dev logs and design notes
 - `/about.html` — About the team and principles
-- `/privacy.html` — Privacy policy (no data collection)
+- `/privacy.html` — Privacy policy (browser storage, analytics and advertising cookies)
 - `/terms.html` — Terms of service
+- `/disclaimer.html` — Disclaimer (independent site, no third-party affiliation)
 - `/contact.html` — Email addresses for bugs, feedback, press
 
 ## Games
 
 - **BuffNook Tower** — Stack 12 physics blocks on a seesaw, survive 5 buffs, decide when to bank. Daily UTC challenge + endless sandbox. Plays on desktop and mobile. URL: `/games/buffnook-tower/`
 
+## Scoring
+
+- Successful bank (lock): 100% of the current height
+- Collapse during the 1.5s lock confirmation: 50% of the height
+- Collapse before banking: 40% of the height
+
 ## Source of Truth
 
 - `data/games.json` — authoritative game metadata
-- `data/posts.json` — blog post metadata
 - `_templates/game.html` — game page template
 - `_templates/page.html` — generic page template
 - `scripts/build.mjs` — generates all game pages, lists, and sitemap from data files

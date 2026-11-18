@@ -51,7 +51,6 @@
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
     <a href="{{GAMES_LINK}}" data-i18n="nav.games">Games</a>
-    <a href="{{BLOG_LINK}}" data-i18n="nav.blog">Blog</a>
     <a href="{{ABOUT_LINK}}" data-i18n="nav.about">About</a>
     <button class="nav-lang" id="site-lang" type="button" aria-label="Switch language">中文</button>
   </div>
@@ -78,10 +77,6 @@
     </div>
 
     <div class="game-bar">
-      <button data-action="like" data-slug="{{SLUG}}">
-        <span class="icon" aria-hidden="true">♡</span><span data-i18n="btn.like">Like</span>
-        <span class="like-count">0</span>
-      </button>
       <button data-action="share">
         <span class="icon" aria-hidden="true">⇪</span><span data-i18n="btn.share">Share</span>
       </button>
@@ -144,12 +139,6 @@
       ]
     }
     </script>
-
-    <section class="comments" data-slug="{{SLUG}}">
-      <h2 data-i18n="comments.title">Share your best run</h2>
-      <p class="prose" style="margin-bottom:16px;" data-i18n="comments.body">What height did you hit before collapsing? Any tower-saving tricks the tips section missed?</p>
-      <div class="comments-empty" data-i18n="comments.empty">还没人评论—— 聊聊你玩的最高塔吧 ↓</div>
-    </section>
   </article>
 </main>
 
@@ -164,6 +153,7 @@
       <a href="{{CONTACT_LINK}}" data-i18n="footer.contact">Contact</a>
       <a href="{{PRIVACY_LINK}}" data-i18n="footer.privacy">Privacy</a>
       <a href="{{TERMS_LINK}}" data-i18n="footer.terms">Terms</a>
+      <a href="{{DISCLAIMER_LINK}}" data-i18n="footer.disclaimer">Disclaimer</a>
     </nav>
   </div>
 </footer>

@@ -7,7 +7,7 @@
       "h1": "BuffNook Tower",
       "title": "BuffNook Tower · Free Physics Stacking Game",
       "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.",
-      "iframe": "embed/buffnook-tower/index.html",
+      "iframe": "embed/buffnook-tower/",
       "cover": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'><rect width='16' height='9' fill='%2326201B'/><text x='8' y='5.5' font-size='3.5' font-family='ui-monospace,monospace' font-weight='800' fill='%23E8963A' text-anchor='middle'>BuffNook Tower</text></svg>",
       "tags": ["physics", "stacking", "daily-challenge", "browser"],
       "related": [],

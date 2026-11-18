@@ -9,6 +9,8 @@
 <meta name="author" content="BuffNook">
 <meta name="theme-color" content="#1B1714">
 <link rel="canonical" href="{{CANONICAL}}">
+<link rel="alternate" hreflang="en" href="{{CANONICAL}}">
+<link rel="alternate" hreflang="x-default" href="{{CANONICAL}}">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
 <link rel="stylesheet" href="{{CSS_PATH}}">
 
@@ -41,7 +43,7 @@
 </script>
 </head>
 
-<body data-slug="{{SLUG}}" data-i18n-title="{{TITLE_I18N}}">
+<body data-slug="{{SLUG}}" data-i18n-title="{{TITLE_I18N}}" data-locale="en">
 
 <nav class="nav" aria-label="Primary">
   <a class="nav-brand" href="{{HOME_LINK}}"><img src="{{HOME_LINK}}assets/img/logo.png" alt="BuffNook Tower" width="168" height="40" decoding="async"></a>
@@ -49,7 +51,7 @@
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
     <a href="{{ABOUT_LINK}}" data-i18n="nav.about">About</a>
-    <button class="nav-lang" id="site-lang" type="button" aria-label="Switch language">中文</button>
+    <a class="nav-lang" id="site-lang" href="/zh/" hreflang="zh-CN" rel="alternate" aria-label="Switch to Chinese">中文</a>
   </div>
 </nav>
 

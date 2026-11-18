@@ -3,12 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BuffNook Tower · Free Physics Stacking Game</title>
-<meta name="description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.">
+<title>BuffNook Tower — Free Browser Physics Balance &amp; Stacking Game</title>
+<meta name="description" content="Play BuffNook Tower free in your browser. Balance tilted blocks on a live seesaw, tame 5 physics buffs, and bank your score before collapse. Daily UTC challenge + sandbox.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="BuffNook">
 <meta name="theme-color" content="#1B1714">
 <link rel="canonical" href="https://buffnook.com/">
+<link rel="alternate" hreflang="en" href="https://buffnook.com/">
+<link rel="alternate" hreflang="zh-CN" href="https://buffnook.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://buffnook.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
 
@@ -45,7 +48,8 @@
   "@type": "VideoGame",
   "name": "BuffNook Tower",
   "url": "https://buffnook.com/",
-  "description": "Stack 12 physics blocks on a tilted seesaw, survive five buffs, and decide when to bank your height. Free to play in any modern browser.",
+  "description": "Play BuffNook Tower free in your browser. Balance tilted blocks on a live seesaw, tame 5 physics buffs, and bank your score before collapse. Daily UTC challenge + sandbox.",
+  "genre": ["Physics", "Puzzle"],
   "applicationCategory": "Game",
   "operatingSystem": "Any (Web Browser)",
   "offers": {
@@ -57,7 +61,7 @@
 </script>
 </head>
 
-<body data-slug="buffnook-tower" data-i18n-title="site.title">
+<body data-slug="buffnook-tower" data-i18n-title="site.title" data-locale="en">
 
 <!-- ============================================================
      1. 顶部导航：桌面水平 / 手机汉堡（不依赖 JS 也能跳）
@@ -68,7 +72,7 @@
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
     <a href="/about" data-i18n="nav.about">About</a>
-    <button class="nav-lang" id="site-lang" type="button" aria-label="Switch language">中文</button>
+    <a class="nav-lang" id="site-lang" href="/zh/" hreflang="zh-CN" rel="alternate" aria-label="Switch to Chinese">中文</a>
   </div>
 </nav>
 
@@ -79,7 +83,7 @@
   <section class="game-wrap">
     <div class="game-head">
       <h1>BuffNook Tower</h1>
-      <p data-i18n="hero.subtitle">Build high — then know when to stop. A free browser physics stacking game.</p>
+      <p data-i18n="hero.subtitle">A free browser physics balance game — stack high, tame five wild buffs, and lock your score before the seesaw tips.</p>
     </div>
 
     <div class="game-stage game-stage--loading" data-slug="buffnook-tower">

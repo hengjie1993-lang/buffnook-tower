@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BuffNook 高塔 — 免费浏览器物理平衡与堆塔游戏</title>
+<meta name="description" content="在浏览器里免费玩 BuffNook 高塔。在会晃的跷跷板上平衡倾斜方块，驯服 5 种物理增益，在坍塌前锁定分数。每日 UTC 挑战 + 沙盒模式。">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="author" content="BuffNook">
+<meta name="theme-color" content="#1B1714">
+<link rel="canonical" href="https://buffnook.com/zh/">
+<link rel="alternate" hreflang="en" href="https://buffnook.com/">
+<link rel="alternate" hreflang="zh-CN" href="https://buffnook.com/zh/">
+<link rel="alternate" hreflang="x-default" href="https://buffnook.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BuffNook Tower">
+<meta property="og:title" content="BuffNook 高塔 — 免费浏览器物理平衡与堆塔游戏">
+<meta property="og:description" content="在浏览器里免费玩 BuffNook 高塔。在会晃的跷跷板上平衡倾斜方块，驯服 5 种物理增益，在坍塌前锁定分数。每日 UTC 挑战 + 沙盒模式。">
+<meta property="og:url" content="https://buffnook.com/zh/">
+<meta property="og:image" content="https://buffnook.com/assets/img/logo.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BuffNook 高塔 — 免费浏览器物理平衡与堆塔游戏">
+<meta name="twitter:description" content="在浏览器里免费玩 BuffNook 高塔。在会晃的跷跷板上平衡倾斜方块，驯服 5 种物理增益，在坍塌前锁定分数。每日 UTC 挑战 + 沙盒模式。">
+<meta name="twitter:image" content="https://buffnook.com/assets/img/logo.png">
+
+<!-- JSON-LD: WebSite (首页) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "BuffNook Tower",
+  "alternateName": "BuffNook",
+  "url": "https://buffnook.com/zh/",
+  "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game."
+}
+</script>
+
+<!-- JSON-LD: VideoGame (首页) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "BuffNook Tower",
+  "url": "https://buffnook.com/zh/",
+  "description": "Play BuffNook Tower free in your browser. Balance tilted blocks on a live seesaw, tame 5 physics buffs, and bank your score before collapse. Daily UTC challenge + sandbox.",
+  "genre": ["Physics", "Puzzle"],
+  "applicationCategory": "Game",
+  "operatingSystem": "Any (Web Browser)",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+
+<body data-slug="buffnook-tower" data-i18n-title="site.title" data-locale="zh-CN">
+
+<!-- ============================================================
+     1. 顶部导航：桌面水平 / 手机汉堡（不依赖 JS 也能跳）
+     ============================================================ -->
+<nav class="nav" aria-label="Primary">
+  <a class="nav-brand" href="/zh/"><img src="/assets/img/logo.png" alt="BuffNook Tower" width="168" height="40" decoding="async"></a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+  <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
+  <div class="nav-links">
+    <a href="/zh/about" data-i18n="nav.about">关于</a>
+    <a class="nav-lang" id="site-lang" href="/" hreflang="en" rel="alternate" aria-label="Switch to English">EN</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     2. 游戏区：三步加载
+     ============================================================ -->
+<main>
+  <section class="game-wrap">
+    <div class="game-head">
+      <h1>BuffNook Tower</h1>
+      <p data-i18n="hero.subtitle">一个免费的浏览器物理平衡游戏——堆得更高，驯服五种任性增益，在跷跷板倾覆前锁住分数。</p>
+    </div>
+
+    <div class="game-stage game-stage--loading" data-slug="buffnook-tower">
+      <!-- 加载中动画（默认显示） -->
+      <div class="game-loader" aria-hidden="true">
+        <div class="spinner"></div>
+        <div class="loader-text" data-i18n="game.loading">加载中…</div>
+      </div>
+      <!-- 游戏 iframe（src 直接写，浏览器立刻开始下载） -->
+      <iframe
+        src="/embed/buffnook-tower/"
+        title="BuffNook Tower — physics stacking game"
+        loading="eager"
+        allow="fullscreen; clipboard-write"
+        referrerpolicy="no-referrer"></iframe>
+    </div>
+
+    <!-- 一排按钮 -->
+    <div class="game-bar">
+      <button data-action="share">
+        <span class="icon" aria-hidden="true">⇪</span><span data-i18n="btn.share">分享</span>
+      </button>
+      <button data-action="fullscreen">
+        <span class="icon" aria-hidden="true">⤢</span><span data-i18n="btn.fullscreen">全屏</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. 相关游戏（首批没有就不渲染 — 留空，由 build.mjs 注入）
+       ============================================================ -->
+
+  <!-- ============================================================
+       5. 这是什么 — 60–100 词，三句话说清游戏定位
+       ============================================================ -->
+  <article class="site">
+    <section class="sec sec-head">
+      <span class="eyebrow" data-i18n="what.eyebrow">这是什么</span>
+      <h2 data-i18n="what.title">BuffNook Tower 是一个关于懂得何时收手的物理游戏。</h2>
+      <p class="prose" data-i18n="what.body">十二块积木落在倾斜的跷跷板上。有的会粘住，有的会下沉，有的会漂浮，有的会滑动。随时可以封顶锁定，锁定后 100% 高度都计入成绩；等太久塔就会塌，只剩坍塌前高度的 40%。免费玩，无需账号，进度存在浏览器里。</p>
+    </section>
+
+    <!-- ============================================================
+         6. 怎么玩：目标 / 键盘 / 鼠标 / 触屏 / 赢法
+         ============================================================ -->
+    <section class="sec">
+      <span class="eyebrow" data-i18n="how.eyebrow">怎么玩</span>
+      <h2 data-i18n="how.title">落块、保持平衡、决定何时锁分。</h2>
+      <div class="howto-grid">
+        <div class="howto">
+          <h3><span class="kbd" data-i18n="how.kbd.mode">键盘</span> <span data-i18n="how.kbd.title">Q · E · 空格 · L</span></h3>
+          <p data-i18n="how.kbd.body"><strong>Q / E</strong> 让下落的积木旋转 15°。<strong>空格</strong> 落块。<strong>L</strong> 连续落 3 块后可以封顶锁定——保持不动 1.5 秒，锁定后 100% 高度都计入成绩。</p>
+        </div>
+        <div class="howto">
+          <h3><span class="kbd" data-i18n="how.mouse.mode">鼠标</span> <span data-i18n="how.mouse.title">点击 · 拖拽</span></h3>
+          <p data-i18n="how.mouse.body">点左右旋转按钮、按键帽落块，或直接在画布上拖拽瞄准。单手就能玩。</p>
+        </div>
+        <div class="howto">
+          <h3><span class="kbd" data-i18n="how.touch.mode">触屏</span> <span data-i18n="how.touch.title">手机单手轻松玩</span></h3>
+          <p data-i18n="how.touch.body">棋盘会自动适配你的手机屏幕，落块、旋转、锁定按钮始终在拇指够得到的位置，不用滚动，也不用缩放。</p>
+        </div>
+      </div>
+      <div class="prose" style="margin-top:18px;">
+        <h3 data-i18n="how.goal.title">目标与计分</h3>
+        <p data-i18n="how.goal.body">你每天 <strong>第一局完整完成的落块</strong> 会被记录为官方成绩（UTC 每日重置）。之后再玩都是练习分，不会覆盖官方成绩。成功封顶锁定保留 <strong>100%</strong> 高度；锁定确认期间意外坍塌保留 <strong>50%</strong>；未锁定直接坍塌只保留 <strong>40%</strong>。300 cm 锁定得 300 cm；300 cm 坍塌得 120 cm。进度存在浏览器的 <code>localStorage</code> 里。</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6b. Buff 图鉴：5 张迷你卡
+         ============================================================ -->
+    <section class="sec">
+      <span class="eyebrow" data-i18n="buff.eyebrow">Buff 图鉴</span>
+      <h2 data-i18n="buff.title">五种 Buff，五种不同的麻烦。</h2>
+      <p class="prose" data-i18n="buff.lead">Buff 会附着在积木上：第 1 块是普通积木，之后每隔一块必带 Buff，一局共 6 个。落手前先看左上角的预览卡。</p>
+      <div class="buff-strip">
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">GLUE</span>
+          <h3 data-i18n="buff.glue.name">强力胶</h3>
+          <p data-i18n="buff.glue.desc">落地即焊死在下方积木上，永不脱开——处理悬挑最稳的办法。</p>
+          <span class="tag" data-i18n="buff.good">增益</span>
+        </article>
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">LEAD</span>
+          <h3 data-i18n="buff.lead.name">3× 铅块</h3>
+          <p data-i18n="buff.lead.desc">密度是普通积木的 3 倍。压在翘起的一侧，能把跷跷板狠狠砸回水平。</p>
+          <span class="tag" data-i18n="buff.good">增益</span>
+        </article>
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">FLOAT</span>
+          <h3 data-i18n="buff.float.name">反重力浮块</h3>
+          <p data-i18n="buff.float.desc">重量只有普通的 20%，还持续上浮——它很讨厌被埋在下面。</p>
+          <span class="tag" data-i18n="buff.good">增益</span>
+        </article>
+        <article class="buff-mini risk">
+          <span class="glyph" aria-hidden="true">ICE</span>
+          <h3 data-i18n="buff.ice.name">滑溜冰块</h3>
+          <p data-i18n="buff.ice.desc">摩擦几乎为零，会滑动、打转，还带着整座塔一起走。</p>
+          <span class="tag" data-i18n="buff.risky">风险</span>
+        </article>
+        <article class="buff-mini risk">
+          <span class="glyph" aria-hidden="true">EXPAND</span>
+          <h3 data-i18n="buff.expand.name">膨胀块</h3>
+          <p data-i18n="buff.expand.desc">落地约 0.8 秒后膨胀 35%——稳住了就是宽帽檐，没稳住就是慢动作爆炸。</p>
+          <span class="tag" data-i18n="buff.risky">风险</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         7. 技巧：只写属实的
+         ============================================================ -->
+    <section class="sec">
+      <span class="eyebrow" data-i18n="tips.eyebrow">真正有用的技巧</span>
+      <h2 data-i18n="tips.title">三个能稳定帮你赢的习惯。</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3 data-i18n="tips.1.title">等积木落稳再瞄准</h3>
+          <p data-i18n="tips.1.body">每块积木落下后跷跷板会晃半秒。塔稳定了再瞄准，别在它还晃的时候出手。</p>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3 data-i18n="tips.2.title">把每个 Buff 当成一个选择题</h3>
+          <p data-i18n="tips.2.body">粘 Buff 会让积木粘住不动——适合固定底部。铅 Buff 会把跷跷板压下去——放在轻的一侧。浮 Buff 刚好抵消铅。冰 Buff 让一切滑动——最后放或干脆不放。膨胀 Buff 落地后会变大——给它留出空间，否则会把塔顶翻。</p>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3 data-i18n="tips.3.title">在你的个人天花板就锁分</h3>
+          <p data-i18n="tips.3.body">大多数玩家在 280–340 cm 附近坍塌。如果你的塔到了 280 而且没明显问题，直接封顶——锁定能保住 100% 高度，再等下去坍塌只剩 40%。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. FAQ — 折叠问答 + JSON-LD FAQPage
+         ============================================================ -->
+    <section class="sec">
+      <span class="eyebrow" data-i18n="faq.eyebrow">常见问题</span>
+      <h2 data-i18n="faq.title">短答，不啰嗦。</h2>
+      <div class="faq">
+        <details><summary data-i18n="faq.q1">每日挑战什么时候重置？</summary>
+          <p data-i18n="faq.a1">BuffNook Tower 每天在 <strong>UTC 00:00</strong> 重置。新种子、新顺序，全世界的人当天看到的 12 块积木都一样。</p>
+        </details>
+        <details><summary data-i18n="faq.q2">为什么我的分数比塔的高度低？</summary>
+          <p data-i18n="faq.a2">高度以厘米为单位在跷跷板上测量——<strong>成功封顶锁定保留 100% 高度</strong>，<strong>锁定确认期间意外坍塌保留 50%</strong>，<strong>未锁定直接坍塌只保留 40%</strong>。300 cm 锁定得 300 cm；300 cm 坍塌得 120 cm。</p>
+        </details>
+        <details><summary data-i18n="faq.q3">官方分和练习分有什么区别？</summary>
+          <p data-i18n="faq.a3">每天 <strong>第一局完整完成的</strong> 是你的官方成绩——锁定、存档、永不再覆盖。之后每一局都是练习分，单独保存供你自己对比。</p>
+        </details>
+        <details><summary data-i18n="faq.q4">BuffNook Tower 免费吗？</summary>
+          <p data-i18n="faq.a4">完全免费，浏览器直接玩——无需账号、无需下载、没有付费墙。进度只存在浏览器的 <code>localStorage</code> 里，key 是 <code>buffnook.tower.save</code>。清除站点数据会重置。</p>
+        </details>
+        <details><summary data-i18n="faq.q5">手机上能玩吗？</summary>
+          <p data-i18n="faq.a5">能。手机上游戏会自动适配屏幕高度，旋转、落块、封顶按钮始终显示在画布下方，一只手就能完成所有操作。iOS Safari 和 Android Chrome 都支持。</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- JSON-LD: FAQPage（只在这个含 FAQ 的页面输出） -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "When does the daily challenge reset?", "acceptedAnswer": {"@type": "Answer", "text": "BuffNook Tower resets every day at 00:00 UTC. New seed, new sequence, everyone in the world sees the same 12 blocks that day."}},
+        {"@type": "Question", "name": "Why is my score lower than the tower height?", "acceptedAnswer": {"@type": "Answer", "text": "Height is measured on the seesaw in centimeters. A successful bank scores 100% of your height, a collapse during the 1.5-second lock confirmation keeps 50%, and collapsing before you bank keeps 40%. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm."}},
+        {"@type": "Question", "name": "What is the difference between official and practice?", "acceptedAnswer": {"@type": "Answer", "text": "Your first completed run each day is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for benchmarking."}},
+        {"@type": "Question", "name": "Is BuffNook Tower free to play?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. BuffNook Tower is 100% free to play in your browser — no account, no downloads, and no paywalls required. Progress saves only to your browser's localStorage under the key buffnook.tower.save."}},
+        {"@type": "Question", "name": "Can I play on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a phone the game fits the screen height automatically and the rotate, drop and lock buttons stay visible below the canvas, so every action is reachable with one hand."}}
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList（首页单级） -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://buffnook.com/zh/"}
+      ]
+    }
+    </script>
+
+  </article>
+</main>
+
+<!-- ============================================================
+     11. 页脚
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span>BuffNook <b>Tower</b></span>
+      <small>© 2026 BuffNook</small>
+    </div>
+    <nav class="footer-links" aria-label="Legal">
+      <a href="/zh/about" data-i18n="footer.about">关于</a>
+      <a href="/zh/contact" data-i18n="footer.contact">联系</a>
+      <a href="/zh/privacy" data-i18n="footer.privacy">隐私</a>
+      <a href="/zh/terms" data-i18n="footer.terms">条款</a>
+      <a href="/zh/disclaimer" data-i18n="footer.disclaimer">免责声明</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="/assets/js/app.js" defer></script>
+</body>
+</html>

@@ -121,7 +121,7 @@
       // Nav
       'nav.about': 'About',
       // Hero
-      'hero.subtitle': 'Build high — then know when to stop. A free browser physics stacking game.',
+      'hero.subtitle': 'A free browser physics balance game — stack high, tame five wild buffs, and lock your score before the seesaw tips.',
       // Buttons
       'btn.share': 'Share',
       'btn.fullscreen': 'Fullscreen',
@@ -139,8 +139,8 @@
       'how.mouse.title': 'Click · Drag',
       'how.mouse.body': 'Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.',
       'how.touch.mode': 'Touch',
-      'how.touch.title': 'One hand, no scrolling',
-      'how.touch.body': 'Tap rotate, tap drop, tap bank. On a phone the game fits the screen height automatically, so the canvas and the control buttons below it always stay visible — no scrolling, no pinching.',
+      'how.touch.title': 'One-hand mobile play',
+      'how.touch.body': 'The board automatically fits your phone screen so the drop, rotate, and lock buttons always stay comfortably within thumb reach—no scrolling or pinching.',
       'how.goal.title': 'Goal & scoring',
       'how.goal.body': 'Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. A successful bank scores <strong>100%</strong> of your height; a collapse during the 1.5-second lock confirmation keeps <strong>50%</strong>; collapsing before you bank keeps <strong>40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm. Progress is saved locally in <code>localStorage</code>.',
       // Tips
@@ -268,7 +268,7 @@
       'privacy.page.title': 'Privacy Policy · BuffNook Tower',
       'terms.page.title': 'Terms of Service · BuffNook Tower',
       // Site titles
-      'site.title': 'BuffNook Tower · Free Physics Stacking Game',
+      'site.title': 'BuffNook Tower — Free Browser Physics Balance & Stacking Game',
       'site.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.',
@@ -295,7 +295,7 @@
     },
     'zh-CN': {
       'nav.about': '关于',
-      'hero.subtitle': '堆得高——也要知道什么时候该停。一个免费的浏览器物理堆塔游戏。',
+      'hero.subtitle': '一个免费的浏览器物理平衡游戏——堆得更高，驯服五种任性增益，在跷跷板倾覆前锁住分数。',
       'btn.share': '分享',
       'btn.fullscreen': '全屏',
       'what.eyebrow': '这是什么',
@@ -310,8 +310,8 @@
       'how.mouse.title': '点击 · 拖拽',
       'how.mouse.body': '点左右旋转按钮、按键帽落块，或直接在画布上拖拽瞄准。单手就能玩。',
       'how.touch.mode': '触屏',
-      'how.touch.title': '单手操作，无需滚动',
-      'how.touch.body': '点旋转、点落块、点锁分。手机上游戏会自动适配屏幕高度，画布和下方控制按钮始终完整可见，不用滚动，也不用缩放。',
+      'how.touch.title': '手机单手轻松玩',
+      'how.touch.body': '棋盘会自动适配你的手机屏幕，落块、旋转、锁定按钮始终在拇指够得到的位置，不用滚动，也不用缩放。',
       'how.goal.title': '目标与计分',
       'how.goal.body': '你每天 <strong>第一局完整完成的落块</strong> 会被记录为官方成绩（UTC 每日重置）。之后再玩都是练习分，不会覆盖官方成绩。成功封顶锁定保留 <strong>100%</strong> 高度；锁定确认期间意外坍塌保留 <strong>50%</strong>；未锁定直接坍塌只保留 <strong>40%</strong>。300 cm 锁定得 300 cm；300 cm 坍塌得 120 cm。进度存在浏览器的 <code>localStorage</code> 里。',
       'tips.eyebrow': '真正有用的技巧',
@@ -430,11 +430,11 @@
       'game.loading': '加载中…',
       // Page titles
       'game.buffnook-tower.page.title': 'BuffNook 高塔 · 免费物理堆塔游戏',
-      'about.page.title': '关于 · BuffNook Tower',
-      'contact.page.title': '联系 · BuffNook Tower',
-      'privacy.page.title': '隐私政策 · BuffNook Tower',
-      'terms.page.title': '服务条款 · BuffNook Tower',
-      'site.title': 'BuffNook 高塔 · 免费物理堆塔游戏',
+      'about.page.title': '关于 · BuffNook 高塔',
+      'contact.page.title': '联系 · BuffNook 高塔',
+      'privacy.page.title': '隐私政策 · BuffNook 高塔',
+      'terms.page.title': '服务条款 · BuffNook 高塔',
+      'site.title': 'BuffNook 高塔 — 免费浏览器物理平衡与堆塔游戏',
       'site.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。BuffNook Tower 是一个免费的浏览器游戏——桌面和手机都能玩，无需账号。',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。免费浏览器游戏。',
@@ -452,7 +452,7 @@
       'disclaimer.s3.body': '本站可能链接到第三方网站，也可能展示第三方广告。我们无法控制、也不对第三方的内容、产品或隐私做法负责。是否访问外部网站由你自行判断。',
       'disclaimer.s4.title': '联系我们',
       'disclaimer.s4.body': '如果你认为本站内容侵犯了你的权利，请通过联系页面告知我们，我们会尽快核实处理。',
-      'disclaimer.page.title': '免责声明 · BuffNook Tower',
+      'disclaimer.page.title': '免责声明 · BuffNook 高塔',
       // 404
       'notfound.title': '页面不存在',
       'notfound.body': '你要找的页面不存在，或者已经被移动了。游戏还在首页等你。',
@@ -488,17 +488,8 @@
   // ---------- 9. 语言切换：站点 ↔ iframe 游戏 ----------
   var GAME_SAVE_KEY = 'buffnook.tower.save';
 
-  function getLang() {
-    try {
-      var raw = localStorage.getItem(GAME_SAVE_KEY);
-      if (raw) {
-        var data = JSON.parse(raw);
-        if (data && data.settings && (data.settings.lang === 'zh-CN' || data.settings.lang === 'en')) return data.settings.lang;
-      }
-    } catch (e) {}
-    return 'en';
-  }
-  function setLang(lang) {
+  // 只写存档并通知 iframe，不改变当前页语言（跳转前同步偏好用）
+  function persistLang(lang) {
     try {
       var raw = localStorage.getItem(GAME_SAVE_KEY);
       var data = raw ? JSON.parse(raw) : { v: 1, settings: {} };
@@ -513,32 +504,30 @@
     if (iframe && iframe.contentWindow) {
       try { iframe.contentWindow.postMessage({ type: 'SET_LANG', lang: lang }, '*'); } catch (_) {}
     }
-    // 翻译网站外壳
-    applyI18n(lang);
+  }
+
+  // 语言由 URL 决定：/zh/* 恒为中文，其余为英文
+  function pageLang() {
+    return document.body.dataset.locale === 'zh-CN' ? 'zh-CN' : 'en';
   }
 
   function initLang() {
-    // 页面加载时无条件应用语言偏好（哪怕没切换按钮 — 法律页也需要翻译）
-    applyI18n(getLang());
+    // 页面语言由 URL 决定，并写回存档，保证 iframe 游戏与外壳一致
+    var lang = pageLang();
+    persistLang(lang);
+    applyI18n(lang);
     
     var btn = document.getElementById('site-lang');
     if (!btn) return;
     
-    function refresh() {
-      var cur = getLang();
-      btn.textContent = cur === 'zh-CN' ? 'EN' : '中文';
-      btn.classList.toggle('active', cur === 'zh-CN');
-    }
-    refresh();
+    // 按钮本身是 <a>，跳转由 href 负责，这里只同步存档与埋点
+    btn.setAttribute('aria-current', lang === 'zh-CN' ? 'true' : 'false');
     btn.addEventListener('click', function () {
-      var next = getLang() === 'en' ? 'zh-CN' : 'en';
-      setLang(next);
-      refresh();
-      window.track('lang_switch', { to: next });
+      window.track('lang_switch', { to: lang === 'en' ? 'zh-CN' : 'en' });
     });
     // 监听 iframe 内部切语言（用户在游戏本体也能点）
     window.addEventListener('message', function (e) {
-      if (e.data && e.data.type === 'LANG_CHANGED') { refresh(); applyI18n(e.data.lang); }
+      if (e.data && e.data.type === 'LANG_CHANGED') { applyI18n(e.data.lang); }
     });
   }
 

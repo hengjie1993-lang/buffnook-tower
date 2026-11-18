@@ -1,5 +1,8 @@
 # 旧地址与已下线栏目的 301 重定向
 /blog             /                        301
+/blog/            /                        301
+/blog/*           /                        301
+/blog.html        /                        301
 /game             /                        301
 /game.html        /                        301
 /games            /games/buffnook-tower/   301

@@ -6,7 +6,7 @@
 <title>BuffNook Tower · Free Physics Stacking Game</title>
 <meta name="description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="author" content="Buffnook">
+<meta name="author" content="BuffNook">
 <meta name="theme-color" content="#1B1714">
 <link rel="canonical" href="https://buffnook.com/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
@@ -140,13 +140,54 @@
           <p data-i18n="how.mouse.body">Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.</p>
         </div>
         <div class="howto">
-          <h3><span class="kbd" data-i18n="how.touch.mode">Touch</span> <span data-i18n="how.touch.title">One hand, 56vh</span></h3>
-          <p data-i18n="how.touch.body">Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching.</p>
+          <h3><span class="kbd" data-i18n="how.touch.mode">Touch</span> <span data-i18n="how.touch.title">One hand, no scrolling</span></h3>
+          <p data-i18n="how.touch.body">Tap rotate, tap drop, tap bank. On a phone the game fits the screen height automatically, so the canvas and the control buttons below it always stay visible — no scrolling, no pinching.</p>
         </div>
       </div>
       <div class="prose" style="margin-top:18px;">
         <h3 data-i18n="how.goal.title">Goal & scoring</h3>
         <p data-i18n="how.goal.body">Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. A successful bank scores <strong>100%</strong> of your height; a collapse during the 1.5-second lock confirmation keeps <strong>50%</strong>; collapsing before you bank keeps <strong>40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm. Progress is saved locally in <code>localStorage</code>.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6b. Buff 图鉴：5 张迷你卡
+         ============================================================ -->
+    <section class="sec">
+      <span class="eyebrow" data-i18n="buff.eyebrow">Buff codex</span>
+      <h2 data-i18n="buff.title">Five buffs, five different problems.</h2>
+      <p class="prose" data-i18n="buff.lead">Buffs arrive attached to a block: the first block is plain, then every second block carries one — six per run. The preview card shows what is coming before you drop.</p>
+      <div class="buff-strip">
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">GLUE</span>
+          <h3 data-i18n="buff.glue.name">Sticky Glue</h3>
+          <p data-i18n="buff.glue.desc">Welds to the block below and never lets go. The safest way to handle an awkward overhang.</p>
+          <span class="tag" data-i18n="buff.good">Favorable</span>
+        </article>
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">LEAD</span>
+          <h3 data-i18n="buff.lead.name">Heavy Lead</h3>
+          <p data-i18n="buff.lead.desc">Three times denser than a normal block. Drop it on the high side to slam the beam back level.</p>
+          <span class="tag" data-i18n="buff.good">Favorable</span>
+        </article>
+        <article class="buff-mini good">
+          <span class="glyph" aria-hidden="true">FLOAT</span>
+          <h3 data-i18n="buff.float.name">Helium Float</h3>
+          <p data-i18n="buff.float.desc">Only 20% of normal weight and constantly pulled upward. It hates being buried.</p>
+          <span class="tag" data-i18n="buff.good">Favorable</span>
+        </article>
+        <article class="buff-mini risk">
+          <span class="glyph" aria-hidden="true">ICE</span>
+          <h3 data-i18n="buff.ice.name">Ice Block</h3>
+          <p data-i18n="buff.ice.desc">Almost zero friction. It slides, spins, and drags the rest of the tower with it.</p>
+          <span class="tag" data-i18n="buff.risky">Risky</span>
+        </article>
+        <article class="buff-mini risk">
+          <span class="glyph" aria-hidden="true">EXPAND</span>
+          <h3 data-i18n="buff.expand.name">Expand Block</h3>
+          <p data-i18n="buff.expand.desc">Swells 35% about 0.8 seconds after landing — a wide cap if it settles, a slow-motion explosion if it does not.</p>
+          <span class="tag" data-i18n="buff.risky">Risky</span>
+        </article>
       </div>
     </section>
 
@@ -165,7 +206,7 @@
         <div class="card">
           <div class="card-num">02</div>
           <h3 data-i18n="tips.2.title">Treat each buff as a question</h3>
-          <p data-i18n="tips.2.body">Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all.</p>
+          <p data-i18n="tips.2.body">Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all. Expand grows after it lands — give it room or it will push the tower over.</p>
         </div>
         <div class="card">
           <div class="card-num">03</div>
@@ -195,7 +236,7 @@
           <p data-i18n="faq.a4">Yes. BuffNook Tower is 100% free to play in your browser — no account, no downloads, and no paywalls required. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it.</p>
         </details>
         <details><summary data-i18n="faq.q5">Can I play on my phone?</summary>
-          <p data-i18n="faq.a5">Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android.</p>
+          <p data-i18n="faq.a5">Yes. On a phone the game fits the screen height automatically and the rotate, drop and lock buttons stay visible below the canvas — every action is reachable with one hand. Works on iOS Safari and Chrome on Android.</p>
         </details>
       </div>
     </section>
@@ -210,7 +251,7 @@
         {"@type": "Question", "name": "Why is my score lower than the tower height?", "acceptedAnswer": {"@type": "Answer", "text": "Height is measured on the seesaw in centimeters. A successful bank scores 100% of your height, a collapse during the 1.5-second lock confirmation keeps 50%, and collapsing before you bank keeps 40%. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm."}},
         {"@type": "Question", "name": "What is the difference between official and practice?", "acceptedAnswer": {"@type": "Answer", "text": "Your first completed run each day is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for benchmarking."}},
         {"@type": "Question", "name": "Is BuffNook Tower free to play?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. BuffNook Tower is 100% free to play in your browser — no account, no downloads, and no paywalls required. Progress saves only to your browser's localStorage under the key buffnook.tower.save."}},
-        {"@type": "Question", "name": "Can I play on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand."}}
+        {"@type": "Question", "name": "Can I play on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. On a phone the game fits the screen height automatically and the rotate, drop and lock buttons stay visible below the canvas, so every action is reachable with one hand."}}
       ]
     }
     </script>
@@ -236,7 +277,7 @@
   <div class="container footer-inner">
     <div class="footer-brand">
       <span>BuffNook <b>Tower</b></span>
-      <small>© 2026 Buffnook</small>
+      <small>© 2026 BuffNook</small>
     </div>
     <nav class="footer-links" aria-label="Legal">
       <a href="/about" data-i18n="footer.about">About</a>

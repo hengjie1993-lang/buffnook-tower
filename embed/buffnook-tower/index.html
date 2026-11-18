@@ -154,6 +154,19 @@ body.lang-zh .lang-en { display: none !important; }
 .s-label { font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; opacity: .62; }
 .s-value { font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: -.01em; }
 .s-sep { width: 1px; height: 12px; background: var(--line-soft); }
+/* 数据条合并进顶栏：与模式切换、静音/暂停同一行 */
+.topbar .statbar {
+  flex: 1 1 auto;
+  width: auto;
+  max-width: none;
+  margin: 0 4px;
+  padding: 0 10px;
+  justify-content: center;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
 
 .stage {
   position: relative;
@@ -569,30 +582,66 @@ body.lang-zh .lang-en { display: none !important; }
 }
 
 /* ---------- Embed mode (iframe 嵌入站点外壳时) ---------- */
-.embed-mode .topbar,
+html.embed-mode { --topbar: 48px; }
 .embed-mode .site-content,
 .embed-mode .site-footer { display: none !important; }
 
-/* 但保留顶栏里的 Daily / Sandbox 模式切换按钮 — 让玩家能切模式 */
-.embed-mode .topbar { display: flex !important; }
+/* 顶栏在 embed 下只保留一行：Daily/Sandbox + 数据条 + 静音/暂停 */
+.embed-mode .topbar {
+  display: flex !important;
+  height: var(--topbar);
+  padding: 0 10px;
+  gap: 8px;
+}
 .embed-mode .topbar .brand { display: none !important; }
-.embed-mode .topbar-actions { display: none !important; }
+.embed-mode .topbar-actions { display: flex !important; }
+.embed-mode .topbar-actions .lang-btn { display: none !important; }
+.embed-mode .mode-switch { margin-left: 0; }
 
 /* 主菜单 overlay 在 embed-mode 下也隐藏（游戏自动开局），但结算 overlay 始终可见 */
 .embed-mode .overlay.menu { display: none !important; }
 .embed-mode .overlay { /* 结算面板保持可见 */ }
 
-.embed-mode .site { max-width: none; padding: 0; margin: 0; }
+.embed-mode .site {
+  height: 100dvh;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* 关键：workbench 必须给顶栏让位，否则底部控制栏会被裁掉 */
 .embed-mode .workbench {
-  height: 100vh !important;
-  min-height: 100vh;
-  padding: 10px;
+  flex: 1 1 auto;
+  height: auto !important;
+  min-height: 0;
+  padding: 8px 10px 10px;
   gap: 8px;
   justify-content: flex-start;
 }
-.embed-mode .statbar { margin: 6px auto; }
-.embed-mode .stage { flex: 1; min-height: 0; }
+.embed-mode .stage { flex: 1 1 auto; height: auto; min-height: 0; }
+.embed-mode .controls { flex: 0 0 auto; margin-top: 0; }
+.embed-mode .keys { display: none; }
 .embed-mode body { overflow: hidden; }
+
+/* 窄屏：顶栏允许折成两行，控制栏始终留在画布下方 */
+@media (max-width: 760px) {
+  .embed-mode .topbar {
+    height: auto;
+    min-height: 44px;
+    padding: 5px 8px;
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .embed-mode .topbar .statbar {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 2px;
+  }
+  .embed-mode .topbar .s-label { font-size: 9px; letter-spacing: .06em; }
+}
 </style>
 </head>
 <body>
@@ -636,16 +685,6 @@ body.lang-zh .lang-en { display: none !important; }
       </button>
     </nav>
 
-    <div class="topbar-actions">
-      <button class="icon-btn" id="btn-sound" type="button" aria-label="Sound">
-        <svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7.5h3l4-3.2v11.4l-4-3.2H3z" fill="currentColor"/><path class="wave" d="M13 6.7a4.6 4.6 0 0 1 0 6.6M15.4 4.6a8 8 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path class="slash" d="M3.5 3.5l13 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <button class="icon-btn lang-btn" id="btn-lang" type="button" aria-label="Language">中文</button>
-      <button class="icon-btn" id="btn-pause" type="button" aria-label="Pause">Ⅱ</button>
-    </div>
-  </header>
-
-  <main class="workbench" id="top">
     <div class="statbar" role="group" aria-label="Run stats">
       <div class="stat"><span class="s-label" id="t-height">Height</span><b class="s-value" id="hud-height">0 cm</b></div>
       <i class="s-sep" aria-hidden="true"></i>
@@ -656,6 +695,16 @@ body.lang-zh .lang-en { display: none !important; }
       <div class="stat"><span class="s-label" id="t-streak">Streak</span><b class="s-value" id="hud-streak">0 d</b></div>
     </div>
 
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btn-sound" type="button" aria-label="Sound">
+        <svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7.5h3l4-3.2v11.4l-4-3.2H3z" fill="currentColor"/><path class="wave" d="M13 6.7a4.6 4.6 0 0 1 0 6.6M15.4 4.6a8 8 0 0 1 0 10.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path class="slash" d="M3.5 3.5l13 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn lang-btn" id="btn-lang" type="button" aria-label="Language">中文</button>
+      <button class="icon-btn" id="btn-pause" type="button" aria-label="Pause">Ⅱ</button>
+    </div>
+  </header>
+
+  <main class="workbench" id="top">
     <div class="stage" id="canvas-wrap">
       <canvas id="game" aria-label="BuffNook Tower game area"></canvas>
 

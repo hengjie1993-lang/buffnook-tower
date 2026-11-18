@@ -25,8 +25,8 @@
         },
         {
           "mode": "Touch",
-          "keys": "One hand, 56vh",
-          "text": "Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching."
+          "keys": "One hand, no scrolling",
+          "text": "Tap rotate, tap drop, tap bank. On a phone the game fits the screen height automatically, so the canvas and the control buttons below it always stay visible — no scrolling, no pinching."
         }
       ],
       "goal": "Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. A successful bank scores <strong>100%</strong> of your height; a collapse during the 1.5-second lock confirmation keeps <strong>50%</strong>; collapsing before you bank keeps <strong>40%</strong>. Banking at 300 cm scores 300 cm; collapsing at 300 cm scores 120 cm. Progress is saved locally in <code>localStorage</code>.",
@@ -39,7 +39,7 @@
         {
           "num": "02",
           "title": "Treat each buff as a question",
-          "text": "Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all."
+          "text": "Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all. Expand grows after it lands — give it room or it will push the tower over."
         },
         {
           "num": "03",
@@ -66,7 +66,7 @@
         },
         {
           "q": "Can I play on my phone?",
-          "a": "Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android."
+          "a": "Yes. On a phone the game fits the screen height automatically and the rotate, drop and lock buttons stay visible below the canvas — every action is reachable with one hand. Works on iOS Safari and Chrome on Android."
         }
       ],
       "dateAdded": "2026-11-10",

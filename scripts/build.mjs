@@ -4,7 +4,7 @@
    Generates games/<slug>/index.html and sitemap.xml
    （列表页入口暂不生成，组件保留备用）
    ============================================================ */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -212,20 +212,30 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey, 
 // 为避免产生空壳/重复排序页，暂不生成 games/index、games/latest、games/popular。
 
 // ---------- 生成 sitemap.xml ----------
+// lastmod 取对应源文件的修改时间（YYYY-MM-DD），供 Google 判断抓取优先级
+function lastmodOf(relPath) {
+  try {
+    return statSync(join(ROOT, relPath)).mtime.toISOString().slice(0, 10);
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+
 const urls = [
-  { url: SITE_URL + '/', changefreq: 'daily', priority: '1.0' },
-  { url: `${SITE_URL}/about`, changefreq: 'monthly', priority: '0.3' },
-  { url: `${SITE_URL}/privacy`, changefreq: 'yearly', priority: '0.1' },
-  { url: `${SITE_URL}/terms`, changefreq: 'yearly', priority: '0.1' },
-  { url: `${SITE_URL}/disclaimer`, changefreq: 'yearly', priority: '0.1' },
-  { url: `${SITE_URL}/contact`, changefreq: 'monthly', priority: '0.2' },
-  ...gamePages.map(p => ({ url: p.url, changefreq: 'weekly', priority: '0.8' })),
+  { url: SITE_URL + '/', lastmod: lastmodOf('index.html'), changefreq: 'daily', priority: '1.0' },
+  { url: `${SITE_URL}/about`, lastmod: lastmodOf('about.html'), changefreq: 'monthly', priority: '0.3' },
+  { url: `${SITE_URL}/privacy`, lastmod: lastmodOf('privacy.html'), changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/terms`, lastmod: lastmodOf('terms.html'), changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/disclaimer`, lastmod: lastmodOf('disclaimer.html'), changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/contact`, lastmod: lastmodOf('contact.html'), changefreq: 'monthly', priority: '0.2' },
+  ...gamePages.map(p => ({ url: p.url, lastmod: lastmodOf(`games/${p.slug}/index.html`), changefreq: 'weekly', priority: '0.8' })),
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
     <loc>${u.url}</loc>
+    <lastmod>${u.lastmod}</lastmod>
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join('\n')}

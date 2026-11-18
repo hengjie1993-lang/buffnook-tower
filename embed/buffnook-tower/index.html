@@ -807,11 +807,11 @@ body.lang-zh .lang-en { display: none !important; }
         <small>© 2026 BuffNook</small>
       </div>
       <nav class="footer-links">
-        <a href="legal.html#about" target="_blank" rel="noopener">About</a>
-        <a href="legal.html#privacy" target="_blank" rel="noopener">Privacy</a>
-        <a href="legal.html#terms" target="_blank" rel="noopener">Terms</a>
-        <a href="legal.html#disclaimer" target="_blank" rel="noopener">Disclaimer</a>
-        <a href="legal.html#contact" target="_blank" rel="noopener">Contact</a>
+        <a href="../../about.html" target="_blank" rel="noopener">About</a>
+        <a href="../../privacy.html" target="_blank" rel="noopener">Privacy</a>
+        <a href="../../terms.html" target="_blank" rel="noopener">Terms</a>
+        <a href="../../terms.html#disclaimer" target="_blank" rel="noopener">Disclaimer</a>
+        <a href="../../contact.html" target="_blank" rel="noopener">Contact</a>
       </nav>
     </div>
   </footer>
@@ -2286,7 +2286,16 @@ class SaveStore {
       const raw = localStorage.getItem(SAVE_KEY);
       if (!raw) return;
       const parsed = JSON.parse(raw);
-      if (!parsed || parsed.v !== 1) return;
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return;
+      if (parsed.v !== 1) {
+        // 兼容早期站点只保存 { settings: { lang } } 的语言偏好。
+        const legacyLang = parsed.v === undefined && parsed.settings && parsed.settings.lang;
+        if (legacyLang === 'en' || legacyLang === 'zh-CN') {
+          this.data = defaultSave();
+          this.data.settings.lang = legacyLang;
+        }
+        return;
+      }
       this.data = this.merge(defaultSave(), parsed);
     } catch (_) {
       try {

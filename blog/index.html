@@ -20,21 +20,38 @@
 <meta property="og:title" content="Blog · BuffNook Tower">
 <meta property="og:description" content="Dev logs, design notes, and stacking tips from the BuffNook Tower team.">
 <meta property="og:url" content="https://buffnook.com/blog/">
-
+<meta property="og:image" content="https://buffnook.com/assets/img/logo.png">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Blog · BuffNook Tower">
 <meta name="twitter:description" content="Dev logs, design notes, and stacking tips from the BuffNook Tower team.">
+<meta name="twitter:image" content="https://buffnook.com/assets/img/logo.png">
 
-
-
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://buffnook.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://buffnook.com/blog/"
+    }
+  ]
+}</script>
 </head>
 
-<body data-slug="">
+<body data-slug="" data-i18n-title="list.blog.page.title">
 
 <nav class="nav" aria-label="Primary">
-  <a class="nav-brand" href="../index.html"><img src="../assets/img/logo.png" alt="BuffNook Tower" loading="lazy">
+  <a class="nav-brand" href="../"><img src="../assets/img/logo.png" alt="BuffNook Tower" loading="lazy"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
@@ -50,20 +67,13 @@
 
   <article class="site">
     <section class="sec sec-head">
-      <span class="eyebrow">Blog</span>
-      <h2>Blog</h2>
-      <p class="prose">Dev logs, design notes, and stacking tips. More posts coming soon.</p>
+      <span class="eyebrow" data-i18n="list.blog.eyebrow">Blog</span>
+      <h2 data-i18n="list.blog.h1">Blog</h2>
+      <p class="prose" data-i18n="list.blog.intro">Dev logs, design notes, and stacking tips. More posts coming soon.</p>
     </section>
     <section class="sec">
       <div class="related-grid">
-        
-      <a class="related-card" href="../games/buffnook-tower/">
-        <img class="related-cover" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'><rect width='16' height='9' fill='%2326201B'/><text x='8' y='5.5' font-size='3.5' font-family='ui-monospace,monospace' font-weight='800' fill='%23E8963A' text-anchor='middle'>BuffNook Tower</text></svg>" alt="BuffNook Tower cover" loading="lazy" onerror="this.style.display='none'">
-        <div class="related-info">
-          <div class="related-name">BuffNook Tower</div>
-          <div class="related-desc">Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free </div>
-        </div>
-      </a>
+        <p class="prose" data-i18n="blog.empty">No posts yet — check back soon.</p>
       </div>
     </section>
   </article>

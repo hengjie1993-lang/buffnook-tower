@@ -20,15 +20,13 @@
 <meta property="og:title" content="BuffNook Tower · Free Physics Stacking Game">
 <meta property="og:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.">
 <meta property="og:url" content="https://buffnook.com/games/buffnook-tower/">
-<meta property="og:image" content="https://buffnook.com/assets/img/cover.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="675">
+<meta property="og:image" content="https://buffnook.com/assets/img/logo.png">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BuffNook Tower · Free Physics Stacking Game">
 <meta name="twitter:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.">
-<meta name="twitter:image" content="https://buffnook.com/assets/img/cover.png">
+<meta name="twitter:image" content="https://buffnook.com/assets/img/logo.png">
 
 <!-- JSON-LD: VideoGame -->
 <script type="application/ld+json">
@@ -40,16 +38,15 @@
   "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Web (desktop & mobile)",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "0", "ratingCount": "0"}
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
 }
 </script>
 </head>
 
-<body data-slug="buffnook-tower">
+<body data-slug="buffnook-tower" data-i18n-title="game.buffnook-tower.page.title">
 
 <nav class="nav" aria-label="Primary">
-  <a class="nav-brand" href="../index.html"><img src="../assets/img/logo.png" alt="BuffNook Tower" loading="lazy">
+  <a class="nav-brand" href="../../"><img src="../../assets/img/logo.png" alt="BuffNook Tower" loading="lazy"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
@@ -70,7 +67,7 @@
     <div class="game-stage game-stage--loading" data-slug="buffnook-tower">
       <div class="game-loader" aria-hidden="true">
         <div class="spinner"></div>
-        <div class="loader-text">Loading…</div>
+        <div class="loader-text" data-i18n="game.loading">Loading…</div>
       </div>
       <iframe
         src="../../embed/buffnook-tower/index.html"
@@ -107,22 +104,22 @@
       <div class="howto-grid">
         
         <div class="howto">
-          <h3><span class="kbd">Keyboard</span> Q · E · Space · L</h3>
-          <p><strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score.</p>
+          <h3><span class="kbd" data-i18n="how.kbd.mode">Keyboard</span> <span data-i18n="how.kbd.title">Q · E · Space · L</span></h3>
+          <p data-i18n="how.kbd.body"><strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score.</p>
         </div>
         <div class="howto">
-          <h3><span class="kbd">Mouse</span> Click · Drag</h3>
-          <p>Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.</p>
+          <h3><span class="kbd" data-i18n="how.mouse.mode">Mouse</span> <span data-i18n="how.mouse.title">Click · Drag</span></h3>
+          <p data-i18n="how.mouse.body">Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.</p>
         </div>
         <div class="howto">
-          <h3><span class="kbd">Touch</span> One hand, 56vh</h3>
-          <p>Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching.</p>
+          <h3><span class="kbd" data-i18n="how.touch.mode">Touch</span> <span data-i18n="how.touch.title">One hand, 56vh</span></h3>
+          <p data-i18n="how.touch.body">Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching.</p>
         </div>
       </div>
       
       <div class="prose" style="margin-top:18px;">
-        <h3>Goal & scoring</h3>
-        <p>Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. Collapse gives you 40% of your final height; a successful bank gives you 50%. Progress is saved locally in <code>localStorage</code> — nothing leaves your browser.</p>
+        <h3 data-i18n="how.goal.title">Goal & scoring</h3>
+        <p data-i18n="how.goal.body">Your <strong>daily official run</strong> is locked on your first completed drop of the day (UTC reset). Any later run is a practice score that does not overwrite the official result. Collapse gives you 40% of your final height; a successful bank gives you 50%. Progress is saved locally in <code>localStorage</code> — nothing leaves your browser.</p>
       </div>
     </section>
 
@@ -133,18 +130,18 @@
         
         <div class="card">
           <div class="card-num">01</div>
-          <h3>Wait a beat before aiming</h3>
-          <p>The seesaw sways for half a second after each block lands. Aim when the tower settles, not when it's still wobbling.</p>
+          <h3 data-i18n="tips.1.title">Wait a beat before aiming</h3>
+          <p data-i18n="tips.1.body">The seesaw sways for half a second after each block lands. Aim when the tower settles, not when it's still wobbling.</p>
         </div>
         <div class="card">
           <div class="card-num">02</div>
-          <h3>Treat each buff as a question</h3>
-          <p>Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all.</p>
+          <h3 data-i18n="tips.2.title">Treat each buff as a question</h3>
+          <p data-i18n="tips.2.body">Glue sinks and stays — good for anchoring the base. Lead presses the beam down — park it on the light side. Float cancels lead exactly. Ice slides everything — land it last or not at all.</p>
         </div>
         <div class="card">
           <div class="card-num">03</div>
-          <h3>Bank at your personal ceiling</h3>
-          <p>Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — the guaranteed 50% still beats collapsing to 40% of less.</p>
+          <h3 data-i18n="tips.3.title">Bank at your personal ceiling</h3>
+          <p data-i18n="tips.3.body">Most players collapse around the 280–340 cm mark. If your tower hits 280 and nothing obvious is wrong, bank it — the guaranteed 50% still beats collapsing to 40% of less.</p>
         </div>
       </div>
     </section>
@@ -154,20 +151,20 @@
       <h2 data-i18n="faq.title">Short answers, no fluff.</h2>
       <div class="faq">
         
-        <details><summary>When does the daily challenge reset?</summary>
-          <p>BuffNook Tower resets every day at <strong>00:00 UTC</strong>. New seed, new sequence, everyone in the world sees the same 12 blocks that day.</p>
+        <details><summary data-i18n="faq.q1">When does the daily challenge reset?</summary>
+          <p data-i18n="faq.a1">BuffNook Tower resets every day at <strong>00:00 UTC</strong>. New seed, new sequence, everyone in the world sees the same 12 blocks that day.</p>
         </details>
-        <details><summary>Why is my score lower than the tower height?</summary>
-          <p>Height is measured on the seesaw in centimeters — <strong>collapse awards 40% of your final height</strong>, <strong>a successful bank awards 50%</strong>. Banking at 300 cm gives you a 150 cm score; collapsing at 300 cm gives you 120 cm.</p>
+        <details><summary data-i18n="faq.q2">Why is my score lower than the tower height?</summary>
+          <p data-i18n="faq.a2">Height is measured on the seesaw in centimeters — <strong>collapse awards 40% of your final height</strong>, <strong>a successful bank awards 50%</strong>. Banking at 300 cm gives you a 150 cm score; collapsing at 300 cm gives you 120 cm.</p>
         </details>
-        <details><summary>What is the difference between official and practice?</summary>
-          <p>Your <strong>first completed run each day</strong> is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for your own benchmarking.</p>
+        <details><summary data-i18n="faq.q3">What is the difference between official and practice?</summary>
+          <p data-i18n="faq.a3">Your <strong>first completed run each day</strong> is your official score — locked, archived, never overwritten. Every run after that is a practice run, saved separately for your own benchmarking.</p>
         </details>
-        <details><summary>Is BuffNook Tower free to play?</summary>
-          <p>Yes. BuffNook Tower is completely free, no account required, no tracking, no ads. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it.</p>
+        <details><summary data-i18n="faq.q4">Is BuffNook Tower free to play?</summary>
+          <p data-i18n="faq.a4">Yes. BuffNook Tower is completely free, no account required, no tracking, no ads. Progress saves only to your browser's <code>localStorage</code> under the key <code>buffnook.tower.save</code>. Clearing site data will reset it.</p>
         </details>
-        <details><summary>Can I play on my phone?</summary>
-          <p>Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android.</p>
+        <details><summary data-i18n="faq.q5">Can I play on my phone?</summary>
+          <p data-i18n="faq.a5">Yes. Mobile view shrinks the game canvas to 56vh, enlarges the rotate/drop/lock buttons, and keeps every action reachable with one hand. Works on iOS Safari and Chrome on Android.</p>
         </details>
       </div>
     </section>

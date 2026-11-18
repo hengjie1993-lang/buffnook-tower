@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -7,20 +7,47 @@
 <meta name="description" content="BuffNook Tower is an independent browser physics stacking game built by a small team. No accounts, no ads, no tracking.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#1B1714">
-<link rel="canonical" href="https://buffnook.com/about.html">
+<link rel="canonical" href="https://buffnook.com/about">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BuffNook Tower">
+<meta property="og:title" content="About · BuffNook Tower">
+<meta property="og:description" content="BuffNook Tower is an independent browser physics stacking game built by a small team. No accounts, no ads, no tracking.">
+<meta property="og:url" content="https://buffnook.com/about">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About · BuffNook Tower">
+<meta name="twitter:description" content="BuffNook Tower is an independent browser physics stacking game built by a small team. No accounts, no ads, no tracking.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://buffnook.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://buffnook.com/about"
+    }
+  ]
+}</script>
 </head>
-<body>
+<body data-i18n-title="about.page.title">
 
 <nav class="nav" aria-label="Primary">
-  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy">
+  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
     <a href="games/index.html" data-i18n="nav.games">Games</a>
     <a href="blog/index.html" data-i18n="nav.blog">Blog</a>
     <a href="about.html" data-i18n="nav.about">About</a>
+    <button class="nav-lang" id="site-lang" type="button" aria-label="Switch language">中文</button>
   </div>
 </nav>
 

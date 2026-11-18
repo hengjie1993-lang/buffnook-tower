@@ -79,11 +79,11 @@
       // 回退：复制链接
       try {
         await navigator.clipboard.writeText(url);
-        toast('链接已复制');
+        toast(document.documentElement.lang === 'zh-CN' ? '链接已复制' : 'Link copied');
         window.track('share_copy');
       } catch (_) {
         // 再回退：prompt 让用户手动复制
-        window.prompt('复制链接分享：', url);
+        window.prompt(document.documentElement.lang === 'zh-CN' ? '复制链接分享：' : 'Copy this link to share:', url);
       }
     });
   }
@@ -157,9 +157,10 @@
           box.dataset.loaded = 'loading';
           io.disconnect();
           var s = document.createElement('script');
-          s.src = 'assets/js/comments.js';
+          var appScript = document.querySelector('script[src$="assets/js/app.js"]');
+          s.src = appScript ? new URL('comments.js', appScript.src).href : 'assets/js/comments.js';
           s.defer = true;
-          s.onload = function () { box.dataset.loaded = 'loaded'; };
+          s.onload = function () { box.dataset.loaded = 'loaded'; applyI18n(getLang()); };
           document.head.appendChild(s);
           window.track('comments_lazy_loaded');
         }
@@ -189,10 +190,13 @@
       // How to play
       'how.eyebrow': 'How to play',
       'how.title': 'Land blocks, keep balance, decide when to bank.',
-      'how.kbd.title': 'Q · Space · L',
+      'how.kbd.mode': 'Keyboard',
+      'how.kbd.title': 'Q · E · Space · L',
       'how.kbd.body': '<strong>Q / E</strong> rotates the falling block 15°. <strong>Space</strong> drops it. <strong>L</strong> locks in after 3 blocks — half your height as the guaranteed score.',
+      'how.mouse.mode': 'Mouse',
       'how.mouse.title': 'Click · Drag',
       'how.mouse.body': 'Click the left/right rotate buttons, tap the drop keycap, or drag directly on the canvas to aim. Everything works with just one hand.',
+      'how.touch.mode': 'Touch',
       'how.touch.title': 'One hand, 56vh',
       'how.touch.body': 'Tap rotate, tap drop, tap bank. Mobile viewport shrinks the game area to 56vh so it stays visible above the control buttons. No scrolling, no pinching.',
       'how.goal.title': 'Goal & scoring',
@@ -287,16 +291,45 @@
       'terms.s5.body': 'We may update these terms from time to time. Continued use of the site after changes constitutes acceptance of the updated terms.',
       // List pages
       'list.games.h1': 'All games',
+      'list.games.eyebrow': 'All',
+      'list.games.intro': 'Every game currently live on BuffNook Tower. New ones drop as we build them.',
+      'list.games.page.title': 'All Games · BuffNook Tower',
       'list.latest.h1': 'Latest arrivals',
+      'list.latest.eyebrow': 'Latest',
+      'list.latest.intro': 'Fresh releases on BuffNook Tower, sorted by release date.',
+      'list.latest.page.title': 'Latest Games · BuffNook Tower',
       'list.popular.h1': 'Most popular',
+      'list.popular.eyebrow': 'Most',
+      'list.popular.intro': 'The games that get the most plays from the community.',
+      'list.popular.page.title': 'Popular Games · BuffNook Tower',
       'list.blog.h1': 'Blog',
+      'list.blog.eyebrow': 'Blog',
+      'list.blog.intro': 'Dev logs, design notes, and stacking tips. More posts coming soon.',
+      'list.blog.page.title': 'Blog · BuffNook Tower',
       'list.empty': 'No games yet. Check back soon.',
+      'blog.empty': 'No posts yet — check back soon.',
+      'game.buffnook-tower.desc': 'Stack 12 physics blocks, survive 5 buffs, and decide when to bank.',
+      'game.loading': 'Loading…',
+      // Page titles
+      'game.buffnook-tower.page.title': 'BuffNook Tower · Free Physics Stacking Game',
+      'about.page.title': 'About · BuffNook Tower',
+      'contact.page.title': 'Contact · BuffNook Tower',
+      'privacy.page.title': 'Privacy Policy · BuffNook Tower',
+      'terms.page.title': 'Terms of Service · BuffNook Tower',
+      'comments.post': 'Post',
+      'comments.reply': 'Reply',
+      'comments.placeholder': 'Share your best height or a tower-saving trick.',
       // Site titles
       'site.title': 'BuffNook Tower · Free Physics Stacking Game',
       'site.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. BuffNook Tower is a free browser game — desktop & mobile, no account required.',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': 'Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.',
       'site.breadcrumb.home': 'Home',
+      // 404
+      'notfound.title': 'Page not found',
+      'notfound.body': 'The page you are looking for does not exist or has moved. The game is still here.',
+      'notfound.back': 'Back to the game',
+      'notfound.page.title': 'Page not found · BuffNook Tower',
     },
     'zh-CN': {
       'nav.games': '游戏大厅',
@@ -311,10 +344,13 @@
       'what.body': '十二块积木落在倾斜的跷跷板上。有的会粘住，有的会下沉，有的会漂浮，有的会滑动。随时可以锁定分数——但等太久塔就会塌，一切归零。免费玩，无需账号，无广告，进度存在浏览器里。',
       'how.eyebrow': '怎么玩',
       'how.title': '落块、保持平衡、决定何时锁分。',
-      'how.kbd.title': 'Q · 空格 · L',
+      'how.kbd.mode': '键盘',
+      'how.kbd.title': 'Q · E · 空格 · L',
       'how.kbd.body': '<strong>Q / E</strong> 让下落的积木旋转 15°。<strong>空格</strong> 落块。<strong>L</strong> 连续落 3 块后可以锁定——锁定得分为当前高度的一半，保底。',
+      'how.mouse.mode': '鼠标',
       'how.mouse.title': '点击 · 拖拽',
       'how.mouse.body': '点左右旋转按钮、按键帽落块，或直接在画布上拖拽瞄准。单手就能玩。',
+      'how.touch.mode': '触屏',
       'how.touch.title': '单手操作，56vh',
       'how.touch.body': '点旋转、点落块、点锁分。手机视口会把游戏区缩小到 56vh，保证控制按钮上方始终可见。不用滚动，不用缩放。',
       'how.goal.title': '目标与计分',
@@ -405,15 +441,44 @@
       'terms.s5.body': '我们可能会不时更新这些条款。修改后继续使用站点即视为接受更新后的条款。',
       // List pages
       'list.games.h1': '全部游戏',
+      'list.games.eyebrow': '全部',
+      'list.games.intro': '浏览 BuffNook Tower 当前上线的所有游戏，新游戏会持续加入。',
+      'list.games.page.title': '全部游戏 · BuffNook Tower',
       'list.latest.h1': '最新上架',
+      'list.latest.eyebrow': '最新',
+      'list.latest.intro': 'BuffNook Tower 的新游戏，按发布日期排序。',
+      'list.latest.page.title': '最新游戏 · BuffNook Tower',
       'list.popular.h1': '最受欢迎',
+      'list.popular.eyebrow': '热门',
+      'list.popular.intro': '玩家最常游玩的 BuffNook Tower 游戏。',
+      'list.popular.page.title': '热门游戏 · BuffNook Tower',
       'list.blog.h1': '博客',
+      'list.blog.eyebrow': '博客',
+      'list.blog.intro': '开发日志、设计笔记和堆塔技巧，更多文章即将发布。',
+      'list.blog.page.title': '博客 · BuffNook Tower',
       'list.empty': '还没有游戏，敬请期待。',
+      'blog.empty': '还没有文章，敬请期待。',
+      'game.buffnook-tower.desc': '堆叠 12 块物理积木，应对 5 种 Buff，并决定何时锁分。',
+      'game.loading': '加载中…',
+      // Page titles
+      'game.buffnook-tower.page.title': 'BuffNook 高塔 · 免费物理堆塔游戏',
+      'about.page.title': '关于 · BuffNook Tower',
+      'contact.page.title': '联系 · BuffNook Tower',
+      'privacy.page.title': '隐私政策 · BuffNook Tower',
+      'terms.page.title': '服务条款 · BuffNook Tower',
+      'comments.post': '发布',
+      'comments.reply': '回复',
+      'comments.placeholder': '分享你的最高成绩或拯救高塔的技巧。',
       'site.title': 'BuffNook 高塔 · 免费物理堆塔游戏',
       'site.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。BuffNook Tower 是一个免费的浏览器游戏——桌面和手机都能玩，无需账号。',
       'site.og.title': 'BuffNook Tower',
       'site.og.description': '在跷跷板上堆 12 块物理积木，挺过 5 种 Buff，决定何时锁分。免费浏览器游戏。',
       'site.breadcrumb.home': '首页',
+      // 404
+      'notfound.title': '页面不存在',
+      'notfound.body': '你要找的页面不存在，或者已经被移动了。游戏还在首页等你。',
+      'notfound.back': '回到游戏',
+      'notfound.page.title': '页面不存在 · BuffNook Tower',
     }
   };
 
@@ -430,11 +495,15 @@
       el.innerHTML = val; // 用 innerHTML 保留 <strong> <code> 等标签
     });
     
-    // 同步 document.title
-    var tKey = lang === 'zh-CN' ? 'site.title' : 'site.title'; // 两个都叫 site.title，但字典值不同
-    // 其实字典 key 相同，直接取 dict 里的值即可
-    var siteTitle = dict['site.title'] || 'BuffNook Tower';
-    document.title = siteTitle;
+    // 占位符与页面标题分别按当前页翻译，避免所有页面都被改成首页标题
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var key = el.dataset.i18nPlaceholder;
+      var val = dict[key] || I18N.en[key];
+      if (val) el.placeholder = val;
+    });
+    var titleKey = document.body.dataset.i18nTitle;
+    var pageTitle = titleKey && (dict[titleKey] || I18N.en[titleKey]);
+    if (pageTitle) document.title = pageTitle;
   }
 
   // ---------- 9. 语言切换：站点 ↔ iframe 游戏 ----------
@@ -453,8 +522,10 @@
   function setLang(lang) {
     try {
       var raw = localStorage.getItem(GAME_SAVE_KEY);
-      var data = raw ? JSON.parse(raw) : { settings: {} };
-      data.settings = data.settings || {};
+      var data = raw ? JSON.parse(raw) : { v: 1, settings: {} };
+      if (!data || typeof data !== 'object' || Array.isArray(data)) data = { v: 1, settings: {} };
+      if (data.v === undefined) data.v = 1;
+      data.settings = data.settings && typeof data.settings === 'object' ? data.settings : {};
       data.settings.lang = lang;
       localStorage.setItem(GAME_SAVE_KEY, JSON.stringify(data));
     } catch (e) {}

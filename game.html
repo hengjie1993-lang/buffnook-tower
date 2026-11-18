@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -6,15 +6,41 @@
 <title>BuffNook Tower · Free Physics Stacking Game</title>
 <meta name="description" content="BuffNook Tower — stack 12 blocks, survive the seesaw, decide when to bank. Free browser game, plays on desktop and mobile.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://buffnook.com/game.html">
+<link rel="canonical" href="https://buffnook.com/game">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BuffNook Tower">
+<meta property="og:title" content="Play BuffNook Tower · Physics Stacking Game">
+<meta property="og:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game — desktop & mobile.">
+<meta property="og:url" content="https://buffnook.com/game">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Play BuffNook Tower · Physics Stacking Game">
+<meta name="twitter:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game — desktop & mobile.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26' font-family='ui-monospace,monospace' font-weight='800'>B</text></svg>">
 <link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://buffnook.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Play",
+      "item": "https://buffnook.com/game"
+    }
+  ]
+}</script>
 </head>
-<body data-slug="buffnook-tower">
+<body data-slug="buffnook-tower" data-i18n-title="game.buffnook-tower.page.title">
 
 <!-- 顶导航 -->
-<nav class="nav">
-  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy">
+<nav class="nav" aria-label="Primary">
+  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
@@ -30,13 +56,13 @@
   <section class="game-wrap">
     <div class="game-head">
       <h1>BuffNook Tower</h1>
-      <p>Free physics stacking game · 12 blocks · 5 buffs · desktop & mobile playable</p>
+      <p data-i18n="hero.subtitle">Free physics stacking game · 12 blocks · 5 buffs · desktop & mobile playable</p>
     </div>
 
     <div class="game-stage game-stage--loading" data-slug="buffnook-tower">
       <div class="game-loader" aria-hidden="true">
         <div class="spinner"></div>
-        <div class="loader-text">Loading…</div>
+        <div class="loader-text" data-i18n="game.loading">Loading…</div>
       </div>
       <iframe
         src="embed/buffnook-tower/index.html"
@@ -49,14 +75,14 @@
     <!-- 一排按钮 -->
     <div class="game-bar">
       <button data-action="like">
-        <span class="icon">♡</span><span>Like</span>
+        <span class="icon" aria-hidden="true">♡</span><span data-i18n="btn.like">Like</span>
         <span class="like-count">0</span>
       </button>
       <button data-action="share">
-        <span class="icon">⇪</span><span>Share</span>
+        <span class="icon" aria-hidden="true">⇪</span><span data-i18n="btn.share">Share</span>
       </button>
       <button data-action="fullscreen">
-        <span class="icon">⤢</span><span>Fullscreen</span>
+        <span class="icon" aria-hidden="true">⤢</span><span data-i18n="btn.fullscreen">Fullscreen</span>
       </button>
     </div>
   </section>

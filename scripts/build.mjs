@@ -55,31 +55,32 @@ for (const g of games) {
   const prefix = depthPrefix(targetRel);
 
   // HowTo blocks
-  const howtoBlocks = (g.howto || []).map(h => `
+  const howtoModes = ['kbd', 'mouse', 'touch'];
+  const howtoBlocks = (g.howto || []).map((h, i) => `
         <div class="howto">
-          <h3><span class="kbd">${h.mode}</span> ${h.keys}</h3>
-          <p>${h.text}</p>
+          <h3><span class="kbd" data-i18n="how.${howtoModes[i]}.mode">${h.mode}</span> <span data-i18n="how.${howtoModes[i]}.title">${h.keys}</span></h3>
+          <p data-i18n="how.${howtoModes[i]}.body">${h.text}</p>
         </div>`).join('');
 
   // Goal block
   const goalBlock = g.goal ? `
       <div class="prose" style="margin-top:18px;">
-        <h3>Goal & scoring</h3>
-        <p>${g.goal}</p>
+        <h3 data-i18n="how.goal.title">Goal & scoring</h3>
+        <p data-i18n="how.goal.body">${g.goal}</p>
       </div>` : '';
 
   // Tips cards
-  const tipsBlocks = (g.tips || []).map(t => `
+  const tipsBlocks = (g.tips || []).map((t, i) => `
         <div class="card">
           <div class="card-num">${t.num}</div>
-          <h3>${t.title}</h3>
-          <p>${t.text}</p>
+          <h3 data-i18n="tips.${i + 1}.title">${t.title}</h3>
+          <p data-i18n="tips.${i + 1}.body">${t.text}</p>
         </div>`).join('');
 
   // FAQ details
-  const faqBlocks = (g.faq || []).map(f => `
-        <details><summary>${f.q}</summary>
-          <p>${f.a}</p>
+  const faqBlocks = (g.faq || []).map((f, i) => `
+        <details><summary data-i18n="faq.q${i + 1}">${f.q}</summary>
+          <p data-i18n="faq.a${i + 1}">${f.a}</p>
         </details>`).join('');
 
   // FAQ JSON-LD entries
@@ -95,7 +96,8 @@ for (const g of games) {
     TITLE: g.title || `${g.name} · BuffNook`,
     DESCRIPTION: g.description || '',
     CANONICAL: `${SITE_URL}/games/${g.slug}/`,
-    OG_IMAGE: `${SITE_URL}/assets/img/cover.png`,
+    OG_IMAGE: `${SITE_URL}/assets/img/logo.png`,
+    TITLE_I18N: `game.${g.slug}.page.title`,
     NAME: g.name,
     SLUG: g.slug,
     H1: g.h1 || g.name,
@@ -143,31 +145,40 @@ function renderGameCards(list, prefix) {
         <img class="related-cover" src="${g.cover || `${prefix}assets/img/cover.png`}" alt="${g.name} cover" loading="lazy" onerror="this.style.display='none'">
         <div class="related-info">
           <div class="related-name">${g.name}</div>
-          <div class="related-desc">${desc}</div>
+          <div class="related-desc" data-i18n="game.${g.slug}.desc">${desc}</div>
         </div>
       </a>`;
   }).join('');
 }
 
-function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey }) {
+function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey, i18nKey, items = games, emptyKey = 'list.empty', emptyText = 'No games yet — check back soon.' }) {
   const prefix = depthPrefix(targetRel);
-  let sorted = [...games];
+  let sorted = [...items];
   if (sortKey === 'dateAdded') sorted.sort((a, b) => (b.dateAdded || '').localeCompare(a.dateAdded || ''));
   else if (sortKey === 'popular') sorted.sort((a, b) => (b.popular || 0) - (a.popular || 0));
   else if (sortKey === 'featured') sorted.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   const cardsHtml = renderGameCards(sorted, prefix);
+  const canonical = `${SITE_URL}/${targetRel.replace(/index\.html$/, '')}`;
+  const breadcrumbJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
+      { '@type': 'ListItem', position: 2, name: h1 || h2, item: canonical },
+    ],
+  }, null, 2);
 
   const body = `
   <article class="site">
     <section class="sec sec-head">
-      <span class="eyebrow">${h2 ? h2.split(' ')[0] || 'Browse' : 'Browse'}</span>
-      <h2>${h2}</h2>
-      <p class="prose">${intro}</p>
+      <span class="eyebrow" data-i18n="${i18nKey}.eyebrow">${h2 ? h2.split(' ')[0] || 'Browse' : 'Browse'}</span>
+      <h2 data-i18n="${i18nKey}.h1">${h2}</h2>
+      <p class="prose" data-i18n="${i18nKey}.intro">${intro}</p>
     </section>
     <section class="sec">
       <div class="related-grid">
-        ${cardsHtml || '<p class="prose">No games yet — check back soon.</p>'}
+        ${cardsHtml || `<p class="prose" data-i18n="${emptyKey}">${emptyText}</p>`}
       </div>
     </section>
   </article>`;
@@ -175,10 +186,13 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey }
   const vars = {
     TITLE: title,
     DESCRIPTION: description,
-    CANONICAL: `${SITE_URL}/${targetRel.replace(/index\.html$/, '')}`,
+    CANONICAL: canonical,
     SLUG: '',
     H1: h1 || h2,
+    H1_I18N: `${i18nKey}.h1`,
+    TITLE_I18N: `${i18nKey}.page.title`,
     OG_TYPE: 'website',
+    OG_IMAGE: `${SITE_URL}/assets/img/logo.png`,
     HOME_LINK: prefix,
     GAMES_LINK: prefix + 'games/index.html',
     BLOG_LINK: prefix + 'blog/index.html',
@@ -188,7 +202,7 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey }
     TERMS_LINK: prefix + 'terms.html',
     CSS_PATH: prefix + 'assets/css/style.css',
     JS_PATH: prefix + 'assets/js/app.js',
-    JSONLD: '',
+    JSONLD: `<script type="application/ld+json">${breadcrumbJsonLd}</script>`,
     BODY: body,
   };
 
@@ -201,6 +215,7 @@ function buildListPage({ targetRel, title, description, h1, h2, intro, sortKey }
 // games/index.html — 全量
 buildListPage({
   targetRel: 'games/index.html',
+  i18nKey: 'list.games',
   title: 'All Games · BuffNook Tower',
   description: 'Browse all physics stacking games on BuffNook Tower.',
   h2: 'All games',
@@ -211,6 +226,7 @@ buildListPage({
 // games/latest/index.html — 按 dateAdded 倒序
 buildListPage({
   targetRel: 'games/latest/index.html',
+  i18nKey: 'list.latest',
   title: 'Latest Games · BuffNook Tower',
   description: 'The most recently added games on BuffNook Tower.',
   h2: 'Latest arrivals',
@@ -221,6 +237,7 @@ buildListPage({
 // games/popular/index.html — 按 popular 倒序
 buildListPage({
   targetRel: 'games/popular/index.html',
+  i18nKey: 'list.popular',
   title: 'Popular Games · BuffNook Tower',
   description: 'The most-played games on BuffNook Tower.',
   h2: 'Most popular',
@@ -231,11 +248,15 @@ buildListPage({
 // blog/index.html（空壳，posts.json 为空）
 buildListPage({
   targetRel: 'blog/index.html',
+  i18nKey: 'list.blog',
   title: 'Blog · BuffNook Tower',
   description: 'Dev logs, design notes, and stacking tips from the BuffNook Tower team.',
   h2: 'Blog',
   intro: 'Dev logs, design notes, and stacking tips. More posts coming soon.',
   sortKey: null,
+  items: [],
+  emptyKey: 'blog.empty',
+  emptyText: 'No posts yet — check back soon.',
 });
 
 // ---------- 生成 sitemap.xml ----------
@@ -245,10 +266,10 @@ const urls = [
   { url: `${SITE_URL}/games/latest/`, changefreq: 'weekly', priority: '0.7' },
   { url: `${SITE_URL}/games/popular/`, changefreq: 'weekly', priority: '0.7' },
   { url: `${SITE_URL}/blog/`, changefreq: 'weekly', priority: '0.6' },
-  { url: `${SITE_URL}/about.html`, changefreq: 'monthly', priority: '0.3' },
-  { url: `${SITE_URL}/privacy.html`, changefreq: 'yearly', priority: '0.1' },
-  { url: `${SITE_URL}/terms.html`, changefreq: 'yearly', priority: '0.1' },
-  { url: `${SITE_URL}/contact.html`, changefreq: 'monthly', priority: '0.2' },
+  { url: `${SITE_URL}/about`, changefreq: 'monthly', priority: '0.3' },
+  { url: `${SITE_URL}/privacy`, changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/terms`, changefreq: 'yearly', priority: '0.1' },
+  { url: `${SITE_URL}/contact`, changefreq: 'monthly', priority: '0.2' },
   ...gamePages.map(p => ({ url: p.url, changefreq: 'weekly', priority: '0.8' })),
 ];
 

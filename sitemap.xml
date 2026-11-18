@@ -26,22 +26,22 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://buffnook.com/about.html</loc>
+    <loc>https://buffnook.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://buffnook.com/privacy.html</loc>
+    <loc>https://buffnook.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>
   </url>
   <url>
-    <loc>https://buffnook.com/terms.html</loc>
+    <loc>https://buffnook.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.1</priority>
   </url>
   <url>
-    <loc>https://buffnook.com/contact.html</loc>
+    <loc>https://buffnook.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.2</priority>
   </url>

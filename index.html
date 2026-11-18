@@ -20,15 +20,13 @@
 <meta property="og:title" content="BuffNook Tower">
 <meta property="og:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.">
 <meta property="og:url" content="https://buffnook.com/">
-<meta property="og:image" content="https://buffnook.com/assets/img/cover.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="675">
+<meta property="og:image" content="https://buffnook.com/assets/img/logo.png">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BuffNook Tower">
 <meta name="twitter:description" content="Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.">
-<meta name="twitter:image" content="https://buffnook.com/assets/img/cover.png">
+<meta name="twitter:image" content="https://buffnook.com/assets/img/logo.png">
 
 <!-- JSON-LD: WebSite (首页) -->
 <script type="application/ld+json">
@@ -38,23 +36,18 @@
   "name": "BuffNook Tower",
   "alternateName": "BuffNook",
   "url": "https://buffnook.com/",
-  "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://buffnook.com/games/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "description": "Stack 12 physics blocks on a seesaw. Survive 5 buffs. Decide when to bank. Free browser game."
 }
 </script>
 </head>
 
-<body data-slug="buffnook-tower">
+<body data-slug="buffnook-tower" data-i18n-title="site.title">
 
 <!-- ============================================================
      1. 顶部导航：桌面水平 / 手机汉堡（不依赖 JS 也能跳）
      ============================================================ -->
 <nav class="nav" aria-label="Primary">
-  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy">
+  <a class="nav-brand" href="index.html"><img src="assets/img/logo.png" alt="BuffNook Tower" loading="lazy"></a>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
   <label class="nav-burger" for="nav-toggle" aria-hidden="true"><span></span><span></span></label>
   <div class="nav-links">
@@ -79,7 +72,7 @@
       <!-- 加载中动画（默认显示） -->
       <div class="game-loader" aria-hidden="true">
         <div class="spinner"></div>
-        <div class="loader-text">Loading…</div>
+        <div class="loader-text" data-i18n="game.loading">Loading…</div>
       </div>
       <!-- 游戏 iframe（src 直接写，浏览器立刻开始下载） -->
       <iframe

@@ -14,22 +14,20 @@
   var SUBMIT = FORM ? FORM.querySelector('button[type="submit"], button:not([type])') : null;
   var LIST = BOX.querySelector('.comments-list');
   var EMPTY = BOX.querySelector('.comments-empty');
-  var formEl = document.createElement('form'); formEl.className = 'comments-form'; formEl.innerHTML = TEXTAREA ? TEXTAREA.outerHTML + (SUBMIT ? SUBMIT.outerHTML : '<button type="submit">Post</button>') : '';
-  // 如果 HTML 里没有表单（只有占位），动态补
+  // 如果 HTML 里没有表单，只补表单和列表，不重复插入标题与空状态
   if (!FORM) {
-    BOX.insertAdjacentHTML('afterbegin',
-      '<h2>Comments</h2>' +
-      '<form class="comments-form" id="comments-form">' +
-        '<textarea placeholder="问最高分？分享一个让高塔坍塌的奇招？" required></textarea>' +
-        '<button type="submit">Post</button>' +
+    var markup = '<form class="comments-form" id="comments-form">' +
+        '<textarea data-i18n-placeholder="comments.placeholder" placeholder="Share your best height or a tower-saving trick." required></textarea>' +
+        '<button type="submit" data-i18n="comments.post">Post</button>' +
       '</form>' +
-      '<div class="comments-list" id="comments-list"></div>' +
-      '<div class="comments-empty" id="comments-empty">还没人评论—— 聊聊你玩的最高塔吧 ↓</div>');
+      '<div class="comments-list" id="comments-list"></div>';
+    if (EMPTY) EMPTY.insertAdjacentHTML('beforebegin', markup);
+    else BOX.insertAdjacentHTML('beforeend', markup);
     FORM = BOX.querySelector('#comments-form');
     TEXTAREA = BOX.querySelector('textarea');
     SUBMIT = BOX.querySelector('button[type="submit"]');
     LIST = BOX.querySelector('#comments-list');
-    EMPTY = BOX.querySelector('#comments-empty');
+    EMPTY = BOX.querySelector('.comments-empty');
   }
 
   // ---------- 本地 mock 存储（后续接真实 API 只改 fetchComments/saveComment） ----------
@@ -84,11 +82,11 @@
         '<span class="comment-time">' + timeStr + '</span>' +
       '</div>' +
       '<div class="comment-body">' + esc(c.text) + '</div>' +
-      '<button class="comment-reply" style="font-size:11px;color:var(--ink-mute);margin-top:6px;background:none;border:none;cursor:pointer;">Reply</button>';
+      '<button class="comment-reply" data-i18n="comments.reply" style="font-size:11px;color:var(--ink-mute);margin-top:6px;background:none;border:none;cursor:pointer;">' + (document.documentElement.lang === 'zh-CN' ? '回复' : 'Reply') + '</button>';
     // 回复按钮
     var replyBtn = el.querySelector('.comment-reply');
     replyBtn.addEventListener('click', function () {
-      var p = prompt('回复 ' + c.author + '：');
+      var p = prompt(document.documentElement.lang === 'zh-CN' ? '回复 ' + c.author + '：' : 'Reply to ' + c.author + ':');
       if (p && p.trim()) {
         saveComment(p, c.id).then(function () {
           fetchComments().then(render);
